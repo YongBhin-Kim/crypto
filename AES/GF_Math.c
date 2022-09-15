@@ -1,21 +1,6 @@
 #include <stdio.h>
 
-/**
- * Rijndael Field : GF(2^8) (quotient field) 에서 사용되는 수학
-    * 기약다항식 m(x) = x^8 + x^4 + x^3 + x + 1
-        * GF_add      : GF(2^8)의 두 원소(다항식)의 합
-        * GF_sub      : GF(2^8)의 두 원소(다항식)의 차
-        * GF_xtime    : GF(2^8)의 원소(다항식)에 x를 곱하는 함수
-        * GF_mul      : GF(2^8)의 두 원소(다항식)의 곱 
-        * GF_div      : GF(2^8)의 두 원소(다항식)의 나눗셈
-        * gcd         : Euclidean Algorithm을 이용하여 두 정수의 최대공약수를 구하는 함수
-        * xgcd        : Extended Euclidean Algorithm을 이용하여 두 정수의 최대공약수 및 역원 계산에 필요한 함수
-        * xgcd_poly   : Extended Euclidean Algorithm을 이용하여 GF(2^8)의 두 원소(다항식)의 최대공약수 및 역원 계산에 필요한 함수
-        * GF_inv      : Little Fermat Theorem을 이용하여 GF(2^8)의 원소(다항식)의 역원을 계산하는 함수
-        * print_poly  : GF(2^8)의 원소(다항식)를 이진수 형태로 출력하는 함수
- */
-
-
+// Polynomial over GF(2^8)
 typedef unsigned char byte;
 
 byte GF_xtime_1(byte f);
@@ -33,7 +18,7 @@ byte GF_inv(byte f);
 void print_poly(byte f);
 
 
-
+// GF_xtime    : GF(2^8)의 원소(다항식)에 x를 곱하는 함수
 byte GF_xtime_1(byte f) {
     int msb;
     byte result;
@@ -45,20 +30,22 @@ byte GF_xtime_1(byte f) {
     return result;
 }
 
+// GF_xtime    : GF(2^8)의 원소(다항식)에 x를 곱하는 함수
 byte GF_xtime_2(byte f) {
     return ( ((f >> 7) & 0x01) == 1 ? (f << 1) ^ 0x1b : f << 1 );
 }
 
-// Rijndael Filed : GF(2^8) - GF_add
+// GF_add      : GF(2^8)의 두 원소(다항식)의 합
 byte GF_add(byte f, byte g) {
     return (f ^ g);
 }
 
+// GF_add      : GF(2^8)의 두 원소(다항식)의 차
 byte GF_sub(byte f, byte g) {
     return (f ^ g);
 }
 
-// Rijndael Filed : GF(2^8) - GF_mul
+// GF_add      : GF(2^8)의 두 원소(다항식)의 곱
 byte GF_mul(byte f, byte g) {
     byte h;
     int coef;
@@ -75,7 +62,7 @@ byte GF_mul(byte f, byte g) {
 }
 
 // GF(2^8) f / g 
-// ==> 91 / 6
+// GF_add      : GF(2^8)의 두 원소(다항식)의 나눗셈
 byte GF_div(byte f, byte g) {
     byte q = 0;
     byte tmp;
@@ -127,7 +114,7 @@ byte GF_div(byte f, byte g) {
     return q;
 }
 
-// GCD - Euclidean Algorithm - ver 1
+// gcd         : Euclidean Algorithm을 이용하여 두 정수의 최대공약수를 구하는 함수
 int gcd(int a, int b) {
     int r;
     while (b != 0) {
@@ -139,12 +126,13 @@ int gcd(int a, int b) {
     return a;
 }
 
-// GCD - Euclidean Algorithm - ver 2
+// gcd         : Euclidean Algorithm을 이용하여 두 정수의 최대공약수를 구하는 함수
 int gcd_2(int a, int b) {
     if (b == 0) return a;
     return gcd_2(b, a%b);
 }
 
+// xgcd        : Extended Euclidean Algorithm을 이용하여 두 정수의 최대공약수 및 역원 계산에 필요한 함수
 int xgcd(int a, int b) {
     int an, bn, new_an, new_bn;
     int ub, vb, q, new_ua, new_va, new_ub, new_vb;
@@ -168,6 +156,7 @@ int xgcd(int a, int b) {
     return an;
 }
 
+// xgcd        : Extended Euclidean Algorithm을 이용하여 두 정수의 최대공약수 및 역원 계산에 필요한 함수
 int xgcd_2(int a, int b) {
 
     int q = 0;
@@ -196,6 +185,7 @@ int xgcd_2(int a, int b) {
 
 
 // 구현중... 혼자 해보기
+// xgcd_poly   : Extended Euclidean Algorithm을 이용하여 GF(2^8)의 두 원소(다항식)의 최대공약수 및 역원 계산에 필요한 함수
 byte xgcd_poly(byte f, byte g) {
 
     byte q = 0;
@@ -226,6 +216,7 @@ byte xgcd_poly(byte f, byte g) {
  * => inverse of f = f^254 mod m(x)
  * 254 = 2 + 4 + 8 + 16 + 32 + 64 + 128
  */
+// GF_inv      : Little Fermat Theorem을 이용하여 GF(2^8)의 원소(다항식)의 역원을 계산하는 함수
 byte GF_inv(byte f) {
     byte f_inv, term;
     f_inv = 1;
@@ -238,6 +229,7 @@ byte GF_inv(byte f) {
     return f_inv;
 }
 
+// print_poly  : GF(2^8)의 원소(다항식)를 이진수 형태로 출력하는 함수
 void print_poly(byte f) {
     for (int i = 7; i >= 0; i--) {
         if (((f>>i) & 0x01) == 1) printf("1");
@@ -245,6 +237,8 @@ void print_poly(byte f) {
     }
     printf("\n");
 }
+
+
 
 int main() {
     /**
