@@ -1,4 +1,5 @@
 /**
+========================================================================================================================
  * Rijndael Field : GF(2^8) (quotient field) 에서 사용되는 수학
     * 기약다항식 m(x) = x^8 + x^4 + x^3 + x + 1
         * GF_add      : GF(2^8)의 두 원소(다항식)의 합
@@ -11,12 +12,14 @@
         * xgcd_poly   : Extended Euclidean Algorithm을 이용하여 GF(2^8)의 두 원소(다항식)의 최대공약수 및 역원 계산에 필요한 함수
         * GF_inv      : Little Fermat Theorem을 이용하여 GF(2^8)의 원소(다항식)의 역원을 계산하는 함수
         * print_poly  : GF(2^8)의 원소(다항식)를 이진수 형태로 출력하는 함수
+========================================================================================================================
  */
 
 
 // Polynomial over GF(2^8)
 typedef unsigned char byte;
 
+void GF_print(byte f);
 byte GF_add(byte f, byte g);
 byte GF_sub(byte f, byte g);
 byte GF_xtime_1(byte f);
@@ -27,6 +30,7 @@ int gcd(int a, int b);
 int gcd_2(int a, int b);
 int xgcd(int a, int b);
 int xgcd_2(int a, int b);
-byte xgcd_poly(byte f, byte g);
+byte xgcd_poly(byte f, byte g); // Extended Euclidean Algorithm over GF(2^8), 구현중
 byte GF_inv(byte f);
-void print_poly(byte f);
+void Get_AES_Sbox(byte sbox[256]);
+void Get_AES_ISbox(byte isbox[256]);

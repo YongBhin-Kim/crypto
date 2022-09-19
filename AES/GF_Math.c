@@ -15,9 +15,17 @@ int xgcd(int a, int b);
 int xgcd_2(int a, int b);
 byte xgcd_poly(byte f, byte g);
 byte GF_inv(byte f);
-void print_poly(byte f);
 
-
+// GF_print  : GF(2^8)의 원소를 출력하는 함수
+void GF_print(byte f) {
+    printf("%3d = %02x =", f, f);
+    int coef;
+    for (int i=7; i>=0; i--) {
+        coef = (f >> i) & 0x01; // lsb
+        if (coef == 1) printf("+ x^%1d ", i);
+    }
+    printf("\n");
+}
 // GF_xtime    : GF(2^8)의 원소(다항식)에 x를 곱하는 함수
 byte GF_xtime_1(byte f) {
     int msb;
@@ -227,15 +235,6 @@ byte GF_inv(byte f) {
     }
 
     return f_inv;
-}
-
-// print_poly  : GF(2^8)의 원소(다항식)를 이진수 형태로 출력하는 함수
-void print_poly(byte f) {
-    for (int i = 7; i >= 0; i--) {
-        if (((f>>i) & 0x01) == 1) printf("1");
-        else printf("0");
-    }
-    printf("\n");
 }
 
 
