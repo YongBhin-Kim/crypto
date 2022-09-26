@@ -15,6 +15,10 @@
 <h3/>대칭키 암호</h3>
 
 **[AES]** <br>
+대칭키 암호인 AES는 10라운드로 구성되며 `key gen` -> `1Round` -> `2Round` -> ... -> `10Round` 순으로 진행된다.<br>
+각 라운드에서 `AddRoundKey` -> `SBox` -> `ShiftRow` -> `Mixcolumns` 순으로 진행된다. <br>
+마지막 라운드 (10Round)에서는 `Mixcolumns` 연산을 제외하고 진행한다.
+
 AES의 SBox 연산은 유한체인 Rijndael Field (GF(2^8)) 에서 다루어지므로 기존의 연산과 다른 Quotient Field : GF(2^8) = GF(2)[x]/<m(x)>; 계수 = 0 or 1; 위에서의 연산으로 이루어진다. <br>
 따라서 GF(2^8) 위에서의 연산의 구현이 필요하다. <br>
 AES의 GF(2^8) 위에서의 기약다항식 m(x)는 x^8 + x^4 + x^3 + x + 1 으로 사용한다. <br>
