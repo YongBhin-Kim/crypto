@@ -8,6 +8,10 @@
 - C
 - C++
 
+**[Run]**
+- Makefile 만들 예정
+- `g++ -o MixCol.exec Matrix_ver2.cpp SBox.cpp GF_Math.c -o MixCol`
+
 <h3/>대칭키 암호</h3>
 
 **[AES]** <br>
