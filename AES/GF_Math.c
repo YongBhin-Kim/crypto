@@ -1,7 +1,7 @@
 #include <stdio.h>
+#include "GF_Math.h"
 
-// Polynomial over GF(2^8)
-typedef unsigned char byte;
+// Polynomial over GF(2^8) --> unsigned char == byte
 
 byte GF_xtime_1(byte f);
 byte GF_xtime_2(byte f);
@@ -26,6 +26,18 @@ void GF_print(byte f) {
     }
     printf("\n");
 }
+
+// GF_print_Matrix : GF(2^8)의 원소(다항식)로 이루어진 행렬을 출력하는 함수
+void GF_print_Matrix(byte Matrix[256]) {
+    printf(" --------------------------------------------------\n");
+    for (int i=0; i<256; i++) {
+        if (i % 16 == 0) printf("| ");
+        printf("%02x ", Matrix[i]);
+        if (i % 16 == 15) printf(" |\n");
+    }
+    printf(" --------------------------------------------------\n\n");
+}
+
 // GF_xtime    : GF(2^8)의 원소(다항식)에 x를 곱하는 함수
 byte GF_xtime_1(byte f) {
     int msb;
@@ -213,7 +225,7 @@ byte xgcd_poly(byte f, byte g) {
         t0 = t1;
         t1 = GF_sub(tmp, GF_mul(t1, q));
         printf("f = ");
-        print_poly(g);
+        GF_print(g);
     } while(g != 0);
 
     return s0;
@@ -239,7 +251,7 @@ byte GF_inv(byte f) {
 
 
 
-int main() {
+// int main() {
     /**
      * GF_mul function 
     printf("%02x ", GF_mul(0xd7, 0x52));
@@ -266,12 +278,14 @@ int main() {
     // GF_inv
     // Little Fermat Thm을 이용하여 GF2^8 원소의 역원을 구한다.
     */
+
+   /**
     byte f = 4;
     byte g = 0; // m(x)
     print_poly(GF_inv(f));
-
+*/
     
 
 
-    return 0;
-}
+    // return 0;
+// }
