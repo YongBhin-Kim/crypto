@@ -31,4 +31,4 @@ AES의 GF(2^8) 위에서의 기약다항식 m(x)는 x^8 + x^4 + x^3 + x + 1 으�
 - - Get_AES_ISbox(Inverse of Sbox)
 
 AES의 MixColumns 연산은 Quotient Ring : GF(2^8)[x]/<x^4 + 1>; 계수 = 0 or 1 or 2 or ... or 255; 위에서의 연산으로 이루어진다. <br>
-원소인 (a0 a1 a2 a3) 의 계수 ai는 GF(2^8)의 원소이다. 즉 0~255 사이의 숫자이며, 일대일 대응되는 다항식을 가진다. <br>
+원소인 (a0 a1 a2 a3) 의 계수 ai는 GF(2^8)의 원소이다. 즉 0~255 사이의 숫자이며, 각각 일대일 대응되는 다항식을 가진다. <br>
