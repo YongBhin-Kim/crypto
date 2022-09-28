@@ -45,10 +45,12 @@ AES의 SBox 연산은 유한체인 Rijndael Field (GF(2^8)) 에서 다루어지�
 
 - **(ShiftRow)**
 - AES의 ShiftRow 연산은 1행을 0번, 2행을 1번, 3행을 2번, 4행을 3번 left rotation 연산한다.
-- row_1 = row_1 <<< 0
-- row_2 = row_2 <<< 1
-- row_3 = row_3 <<< 2
-- row_4 = row_4 <<< 3
+  ```row_1 = row_1 <<< 0
+  row_2 = row_2 <<< 1
+  row_3 = row_3 <<< 2
+  row_4 = row_4 <<< 3
+  ``` 
+<br>
 
 - **(MixColumns)**
 - AES의 MixColumns 연산은 Quotient Ring : GF(2^8)^4 = GF(2^8)[x]/<x^4 + 1>; 계수 = 0 or 1 or 2 or ... or 255; 위에서의 연산으로 이루어진다. <br>
