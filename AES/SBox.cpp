@@ -1,3 +1,9 @@
+/**
+ * AES - FIPS 197 표준문서
+ * 4. Mathematical Prelimaries - SBox
+ */
+
+
 #include <iostream>
 #include <stdio.h>
 #include "SBox.h"
@@ -49,7 +55,7 @@ byte AES_Affine(byte x) {
 
 /**
  * AES Sbox
- * y = Sbox(x) = A * x^(-1) + b
+ * y = Sbox[x] = A * x^(-1) + b
  */
 void Get_AES_Sbox(byte sbox[256]) {
     // 0 ^ -1 = 0 을 별도로 처리하기
@@ -61,7 +67,8 @@ void Get_AES_Sbox(byte sbox[256]) {
 
 /**
  * AES ISBox
- * x = ISbox(y) = A^(-1)*(y + b)^(-1)
+ * x = ISbox(y) = [ A^(-1)*(y + b) ]^(-1)
+ * 
  * 방법 1) 각 원소는 GF(2^8)의 원소이며 GF(2^8)은 유한체 이므로 역원을 각각 계산하여 역행렬을 구하여 계산할 수 있다.
  * 방법 2) 간단히 Sbox의 결과값을 이용하여 계산
  * 2번을 사용하여 구현
@@ -75,12 +82,13 @@ void Get_AES_ISbox(byte isbox[256]) {
 }
 
 void print_Sbox() {
-    Get_AES_Sbox(Sbox);   printf("\n [Sbox 출력]\n");  GF_print_Matrix(Sbox);
-    Get_AES_ISbox(ISbox); printf("\n [ISbox 출력]\n"); GF_print_Matrix(ISbox);
+    Get_AES_Sbox(SBox);   printf("\n [SBox 출력]\n");  GF_print_Matrix(SBox);
+    Get_AES_ISbox(ISBox); printf("\n [ISBox 출력]\n"); GF_print_Matrix(ISBox);
 }
 
-// int main() {
 
+
+// int main() {
     /** 
      * byte Sbox[256], ISbox[256] ---> SBox.h에 선언
      */
