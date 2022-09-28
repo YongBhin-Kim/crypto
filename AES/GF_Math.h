@@ -1,5 +1,7 @@
 #pragma once
-#include "Matrix_ver2.h"
+// #include "Matrix_ver3.h"
+// #include "AES8.h"
+
 /**
 ========================================================================================================================
  * Rijndael Field : GF(2^8) (== GF(2)[x] / <m(x)> ) (quotient field) 에서 사용되는 수학

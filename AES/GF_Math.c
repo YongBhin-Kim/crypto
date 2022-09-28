@@ -1,8 +1,14 @@
+/**
+ * AES - FIPS 197 표준문서
+ * 4. Mathematical Prelimaries - 유한체 연산
+ */
+
 #include <stdio.h>
 #include "GF_Math.h"
 
 // Polynomial over GF(2^8) --> unsigned char == byte
 
+void GF_print(byte f);
 byte GF_xtime_1(byte f);
 byte GF_xtime_2(byte f);
 byte GF_add(byte f, byte g);
@@ -65,7 +71,7 @@ byte GF_sub(byte f, byte g) {
     return (f ^ g);
 }
 
-// GF_add      : GF(2^8)의 두 원소(다항식)의 곱
+// GF_add      : GF(2^8)의 두 원소(다항식)의 곱, xtimes 이용
 byte GF_mul(byte f, byte g) {
     byte h;
     int coef;
