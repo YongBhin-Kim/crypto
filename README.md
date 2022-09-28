@@ -36,13 +36,15 @@ AES의 GF(2^8) 위에서의 기약다항식 m(x)는 x^8 + x^4 + x^3 + x + 1 으�
 - - 유한체의 곱셈의 역원
 <br>
 
-- **(SBox - SBox.cpp)**
+- **(SBox Table)**
 - 유한체 GF(2^8)위에서의 연산을 이용하여 AES Sbox를 구한다.
+- Affine 변환 : `output = fixed_Matrix_A * input(^-1) + fixed_vector_b`
 <br>
 
-AES의 MixColumns 연산은 Quotient Ring : GF(2^8)^4 = GF(2^8)[x]/<x^4 + 1>; 계수 = 0 or 1 or 2 or ... or 255; 위에서의 연산으로 이루어진다. <br>
-원소인 (a0 a1 a2 a3) 의 계수 ai는 GF(2^8)의 원소이다. 즉 0~255 사이의 숫자이며, 각각 일대일 대응되는 다항식을 가진다. <br>
 
 - **(Mix columns)**
-- quotient ring GF(2^8)^4 위에서의 연산을 이용하여 AES Mincolumns 연산을 구현한다. 행렬 연산의 원소들은 각각 GF(2^8)의 원소이므로 원소들의 연산도 유한체 위에서의 연산으로 진행한다.
+- AES의 MixColumns 연산은 Quotient Ring : GF(2^8)^4 = GF(2^8)[x]/<x^4 + 1>; 계수 = 0 or 1 or 2 or ... or 255; 위에서의 연산으로 이루어진다. <br>
+원소인 (a0 a1 a2 a3) 의 계수 ai는 GF(2^8)의 원소이다. 즉 0~255 사이의 숫자이며, 각각 일대일 대응되는 다항식을 가진다. <br>
+- 선형 변환인 MixColumns는 행렬로 표현 가능하며 quotient ring GF(2^8)^4 위에서의 연산을 이용하여 AES Mincolumns 연산을 구현한다. 행렬 연산의 원소들은 각각 GF(2^8)의 원소이므로 원소들의 연산도 유한체 위에서의 연산으로 진행한다.
+- `output_column = fixed_MC * input_column`
 
