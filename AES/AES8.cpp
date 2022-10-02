@@ -134,6 +134,3 @@ int main()
     Run_AES8_test();
 }
 
-
-
-
