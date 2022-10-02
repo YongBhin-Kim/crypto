@@ -10,7 +10,13 @@
 
 **[Run]**
 - Makefile 만들 예정
-- `g++ -o MixCol.exec Matrix_ver2.cpp SBox.cpp GF_Math.c -o MixCol`
+- AES8 
+- - 경로  `AES/AES8`
+- - 명령어 `g++ -o AES8.exec AES8.cpp ../Math/GF_Matrix_Math.cpp ../Math/GF_Math.c -o AES8`
+
+- AES32
+- - 경로  `AES/AES32`
+- - 명령어 `g++ -o AES32.exec AES32.cpp ../Math/GF_Matrix_Math.cpp ../Math/GF_Math.c -o AES32`
 
 <h3/>대칭키 암호</h3>
 
