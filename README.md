@@ -16,7 +16,7 @@
 
 - AES32
 - - 경로  `AES/AES32`
-- - 명령어 `g++ -o AES32.exec AES32.cpp ../Math/GF_Matrix_Math.cpp ../Math/GF_Math.c -o AES32`
+- - 명령어 `g++ -o AES32.exec AES32.cpp  -o AES32`
 
 <h3/>대칭키 암호</h3>
 
@@ -26,6 +26,8 @@
 각 라운드에서 `SBox` -> `ShiftRow` -> `Mixcolumns` -> `AddRoundKey` 순으로 진행된다. <br>
 마지막 라운드 (10Round)에서는 `Mixcolumns` 연산을 제외한다.
 <br>
+
+**AES 8비트** <br>
 
 AES의 SBox 연산은 유한체인 Rijndael Field (GF(2^8)) 에서 다루어지므로 기존의 연산과 다른 Quotient Field : GF(2^8) = GF(2)[x]/<m(x)>; 계수 = 0 or 1; 위에서의 연산으로 이루어진다. 따라서 GF(2^8) 위에서의 연산의 구현이 필요하다. <br> AES의 GF(2^8) 위에서의 기약다항식 m(x)는 x^8 + x^4 + x^3 + x + 1 으로 사용한다. <br>
 
@@ -69,3 +71,21 @@ Quotient Ring의 원소인 fixed_a(x) = (a0 a1 a2 a3) (== (3 1 1 2)) 의 계수 
 - **(AddRoundKey)**
 - AES의 AddRoundKey 연산은 input과 key를 xor연산하여 출력한다.
 - `output = input ^ key`
+<br>
+
+**AES 32비트** <br>
+- AES의 1~9라운드의 라운드 함수는 SubBytes --> ShiftRows --> MixColumns --> AddRoundKey 순으로 진행된다. <br>
+AES 8비트의 4*4행렬의 열들을 각각 Little Endian 방식으로 이어붙인다고 생각하면 1개의 행과 4개의 32비트 크기의 열이 존재하는 배열로 생각할 수 있다.<br>
+SubBytes 연산에 사용되는 SBox는 모든 256개의 원소에 대해 미리 계산하여 테이블 형태로 메모리에 저장해둘 수 있다. <br>
+MixColumns 연산은 Quotient Ring의 고정된 다항식이며 고정된 행렬로 변환하여 생각할 수 있다고 앞서 언급하였다. <br>
+행렬과 벡터의 곱이므로 행렬의 각 열을 하나의 32bit unsigned int(Little Endian)로 생각한다면 4개의 벡터와 벡터의 내적으로 변환할 수 있고, 그 결과값인 scalar(물론 여기서는 GF(2^8)의 원소 4개의 이어짐)의 합 4번으로 MixColumns연산을 수행할 수 있다. 여기서 말하는 합은 GF(2^8)에서의 합이므로 xor연산으로 처리한다. <br>
+MixColumns 연산 이전에 수행되는 ShiftRows 연산은 1행, 2행, 3행을 각각 1,2,3 회 left rotate연산을 수행하는데, 행렬의 1행, 2행, 3행을 각각 1,2,3 회 right rotate한 위치에서 원소를 가져와서 MixColumns의 0열, 1열, 2열, 3열에 삽입한다. <br>
+<br>
+AES의 10라운드는 MixColumns 연산이 제외되므로 고정된 행렬을 단위행렬로 계산하여 테이블을 이용한다. <br>
+이 방식으로 사전 계산된 테이블을 이용하여 AES 32비트를 구현한다. <br>
+
+- use `pre-computated Table 0~4` : 1-9 Round 0-4 Column 에 해당하는 Table
+- use `pre-computated Table 5` : 10 Round 0~4열에 해당하는 Table
+
+
+
