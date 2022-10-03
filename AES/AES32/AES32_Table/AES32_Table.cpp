@@ -8,7 +8,7 @@
 
 
 // AES SBox
-byte SBox[256] = { 
+u8 SBox[256] = { 
  0x63, 0x7c, 0x77, 0x7b, 0xf2, 0x6b, 0x6f, 0xc5, 0x30, 0x01, 0x67, 0x2b, 0xfe, 0xd7, 0xab, 0x76, 
  0xca, 0x82, 0xc9, 0x7d, 0xfa, 0x59, 0x47, 0xf0, 0xad, 0xd4, 0xa2, 0xaf, 0x9c, 0xa4, 0x72, 0xc0, 
  0xb7, 0xfd, 0x93, 0x26, 0x36, 0x3f, 0xf7, 0xcc, 0x34, 0xa5, 0xe5, 0xf1, 0x71, 0xd8, 0x31, 0x15, 
@@ -34,14 +34,15 @@ byte SBox[256] = {
 // Te3[x] = [   S(x),    S(x),  3*S(x),  2*S(x) ]
 // Te4[x] = [   S(x),    S(x),    S(x),    S(x) ]
 
-// Xtimes
-byte GF_xtime(byte f) {
-    return ( ((f >> 7) & 0x01) == 1 ? (f << 1) ^ 0x1b : f << 1 );
+// Xtimes : mod (x^8 + x^4 + x^3 + x + 1)
+u8 GF_xtime(u8 x) {
+    return ( ((x >> 7) & 0x01) == 1 ? (x << 1) ^ 0x1b : x << 1 );
 }
 
 void Gen_AES32_EncTables() {
     u32 Te0[256], Te1[256], Te2[256], Te3[256], Te4[256];
-    byte sx; // SBox[i]
+    u8 sx; // SBox[i]
+    /*
     for (int i=0; i<256; i++) {
         sx = SBox[i];
         Te0[i] = (GF_xtime(sx) << 24) ^ (sx << 16) ^ (sx << 8) ^ (GF_xtime(sx) ^ sx);
@@ -50,6 +51,8 @@ void Gen_AES32_EncTables() {
         Te3[i] = (Te2[i] >> 8) ^ (sx << 24);
         Te4[i] = (Te1[i] << 16) ^ (Te3[i] >> 16);
     }
+    */
+    
     /*
     printf("u32 Te1[256] = { \n");
     for (int i=0; i<256; i++) {
@@ -77,9 +80,13 @@ void Gen_AES32_EncTables() {
     */
 }
 
-int main() {
-    Gen_AES32_EncTables();
-}
+
+// int main() {
+//     Gen_AES32_EncTables();
+// }
+
+
+// /*
 
 u32 Te0[256] = { 
  0xc66363a5,  0xf87c7c84,  0xee777799,  0xf67b7b8d, 
@@ -415,3 +422,4 @@ u32 Te4[256] = {
  0x41414141,  0x99999999,  0x2d2d2d2d,  0x0f0f0f0f, 
  0xb0b0b0b0,  0x54545454,  0xbbbbbbbb,  0x16161616 
  };
+//  */
