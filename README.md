@@ -86,6 +86,6 @@ AES의 10라운드는 MixColumns 연산이 제외되므로 고정된 행렬을 �
 
 - use `pre-computated Table 0~3` : 1-9 Round 0-4 Column 에 해당하는 Table
 - use `pre-computated Table 4 : 10 Round 0~4열에 해당하는 Table
-
+<br>
 
 
