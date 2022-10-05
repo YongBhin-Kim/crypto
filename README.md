@@ -8,6 +8,10 @@
 - C
 - C++
 
+**[Implementation]**
+- C style implementation
+- C++ implemtation using Class
+
 **[Run]**
 - Makefile 만들 예정
 - AES8 
