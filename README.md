@@ -27,7 +27,7 @@
 대칭키 암호인 AES는 10라운드로 구성되며 `key gen` -> `1Round` -> `2Round` -> ... -> `10Round` 순으로 진행된다.<br>
 1라운드 시작 전 `AddRoundKey` 연산을 1회 진행한다. <br>
 각 라운드에서 `SBox` -> `ShiftRow` -> `Mixcolumns` -> `AddRoundKey` 순으로 진행된다. <br>
-마지막 라운드 (10Round)에서는 `Mixcolumns` 연산을 제외한다.
+마지막 라운드 (10Round)에서는 AES의 대칭성을 고려하여 `Mixcolumns` 연산을 제외한다.<br>
 <br>
 
 **AES 8비트** <br>
@@ -91,4 +91,7 @@ AES의 10라운드는 MixColumns 연산이 제외되므로 고정된 행렬을 �
 - use `pre-computated Table 4` : 10 Round 0~4열에 해당하는 Table
 <br>
 
+- **(Key Scheduling)**
+- AES의 key generation에 해당하는 부분 <br>
+1 Round 이전, 10 Round Whitening Key로 이용하기 위해 AES-128 기준 44 word (32비트 : 11 * 4 word, 8비트 : 11 * 16 byte) 로 구성한다.
 
