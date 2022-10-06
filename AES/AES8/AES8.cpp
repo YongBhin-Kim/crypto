@@ -78,7 +78,10 @@ void AES_Encrypt(byte PT[16], byte RK[11][16], byte CT[16]) {
     byte state[16];
     for (int i=0; i<16; i++) state[i] = PT[i];
 
+    // AddRoundKey
     AddRoundKey(state, RK[0]);
+
+    // 1~9 Round
     for (int r=1; r<=9; r++) {
         SubBytes(state);
         ShiftRows(state);
@@ -86,6 +89,7 @@ void AES_Encrypt(byte PT[16], byte RK[11][16], byte CT[16]) {
         AddRoundKey(state, RK[r]);
     }
 
+    // 10 Round : SubBytes --- ShiftRow --- AddRoundKey
     SubBytes(state);
     ShiftRows(state);
     AddRoundKey(state, RK[10]);
@@ -133,4 +137,3 @@ int main()
 {
     Run_AES8_test();
 }
-
