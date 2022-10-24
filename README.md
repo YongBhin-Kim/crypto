@@ -95,3 +95,6 @@ AES의 10라운드는 MixColumns 연산이 제외되므로 고정된 행렬을 �
 - AES의 key generation에 해당하는 부분 <br>
 1 Round 이전, 10 Round Whitening Key로 이용하기 위해 AES-128 기준 44 word (32비트 : 11 * 4 word, 8비트 : 11 * 16 byte) 로 구성한다.
 
+**AES 복호화** <br>
+AES의 복호화를 위해 AES의 대칭성에 대하여 알아야 한다. <br>
+AES의 10라운드에는 MixColumns이 없으므로 복호화는 AddroundKey --> ShiftRows --> SubBytes --> MixColumns 순으로 진행되며 
