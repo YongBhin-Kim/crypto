@@ -24,6 +24,8 @@
 **[Coming soon]**
 
 Implementation and test vectors for various modes of AES will be provided. <br>
+Mode Of Operation Test : ECB, CBC, OFB, CFB, CTR, GCM <br>
+
 
 <h3/>대칭키 암호</h3>
 
