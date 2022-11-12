@@ -31,6 +31,38 @@ void state2byte(u32 state[4], u8 ct[16]) {
     PUTU32(ct+12, state[3]);
 }
 
+void printstate(u32 state[4]) {
+    for (int i=0; i<4; i++) printf("%08x ", state[i]); printf("\n");
+}
+
+u32 RotWord(u32 w32) {
+    return (w32 << 8) ^ (w32 >> 24);
+}
+
+u32 SubWord(u32 w32) {
+    return (SBox[w32 >> 24] << 24) ^ (SBox[(w32 >> 16) & 0xff] << 16) ^ (SBox[(w32 >> 8) & 0xff] << 8) ^ SBox[w32 & 0xff];
+}
+
+void AES32_KeySchedule(u8 k[16], u32 rk[11][4]) {
+    u32 tmp;
+    int rcon_counter;
+
+    for (int i=0; i<4; i++)
+        rk[0][i] = GETU32(k+4*i);
+    
+    rcon_counter=0;
+    for (int i=1; i<11; i++) {
+        tmp = rk[i-1][3];
+        for (int k=0; k<4; k++) {
+            if (k == 0) {
+                tmp = SubWord(RotWord(tmp)) ^ Rcon[rcon_counter];
+                rcon_counter++;
+            }
+            rk[i][k] = rk[i-1][k] ^ tmp;
+            tmp = rk[i][k];
+        }
+    }
+}
 
 // Te는 이미 SBox까지 처리한 것
 // output[0] = input[0]>>24 ^ input[1]>>16 ^ input[2]>>8 ^ input[3]
@@ -71,48 +103,170 @@ void AES32_Enc(u8 pt[16], u32 rk[11][4], u8 ct[16]) {
     state2byte(state, ct);
 }
 
+// AES8 AddRoundKey
+void AES8_AddRoundKey(u8 state[16], u8 rk[16]) {
+    for (int i=0; i<16; i++)
+        state[i] ^= rk[i];
+}
+
+// AES8 InvSubBytes
+void AES8_InvSubbytes(u8 state[16]) {
+    for (int i=0; i<16; i++)
+        state[i] = ISBox[state[i]];
+}
+
+// AES8_InvShiftRows : 각 행을 오른쪽으로 0, 1, 2, 3칸 로테이트 한다.
+//     0   4   8   12                      0   4   8   12
+//     1   5   9   13      -------->       13  1   5   9
+//     2   6   10  14                      10  14  2   6
+//     3   7   11  15                      7   11  15  3
+void AES8_InvShiftRows(u8 state[16]) {
+    u8 tmp;
+    tmp = state[13];
+    state[13] = state[9];
+    state[9] = state[5];
+    state[5] = state[1];
+    state[1] = tmp;
+
+    tmp = state[2];
+    state[2] = state[10];
+    state[10] = tmp;
+    tmp = state[6];
+    state[6] = state[14];
+    state[14] = tmp;
+
+    tmp = state[3];
+    state[3] = state[7];
+    state[7] = state[11];
+    state[11] = state[15];
+    state[15] = tmp;
+
+}
+
+// AES8_InvMixColumns : 다항식이 3x^3 + x^2 + x + 1 ----> bx^3 + dx^2 + 9x + e 로 바뀐다. ( GF(2^8)^4에서의 역원, 혹은 행렬에서의 역행렬, 링에서의 다항식은 x^4 + 1 )
+void AES8_InvMixColumns(u8 state[16]) {
+    // y = MC x         // 행렬과 벡터의 곱으로 연산
+    u8 InvMixCol[4][4] = { {0x0e, 0x0b, 0x0d, 0x09}, {0x09, 0x0e, 0x0b, 0x0d}, {0x0d, 0x09, 0x0e, 0x0b} , {0x0b, 0x0d, 0x09, 0x0e} };
+
+    GF_Matrix MC;
+    MC.row = 4; MC.col = 4;
+    for (int i = 0; i < 4; i++)
+        for (int j = 0; j < 4; j++)
+            MC.M[i][j] = InvMixCol[i][j];
+
+    GF_Matrix X, Y; // Column vector - 4 x 1 Matrix
+    X.col = 1; X.row = 4;
+    Y.col = 1; Y.row = 4;
+
+    // Y = MC * X
+    for (int col=0; col<4; col++) {
+        for (int i=0; i<4; i++) X.M[i][0] = state[col*4+i]; // col=0 -> 0,1,2,3; col=1 -> 4,5,6,7 ...
+        Y = GF_Mat_Mul(MC, X);
+
+        for (int i=0; i<4; i++) state[col*4+i] = Y.M[i][0];
+    }
+}
+
+// AES8 KeySchedule
+void AES8_KeySchedule(u8 k[16], u8 rk[11][16]) {
+    u32 rk32[11][4];
+
+    AES32_KeySchedule(k, rk32);
+
+    for (int i=0; i<11; i++)
+        state2byte(rk32[i], rk[i]);
+}
+
+// AES8 DECRYPTION
+void AES8_Dec(u8 ct[16], u8 k[16], u8 dec[16]) {
+    u8 state[16];
+    for (int i=0; i<16; i++)
+        state[i] = ct[i];
+    
+    u8 rk[11][16];
+    AES8_KeySchedule(k, rk);
+
+    AES8_AddRoundKey(state, rk[10]);
+
+    for (int r = 9; r >= 1; r--) {
+        AES8_InvSubbytes(state);
+        AES8_InvShiftRows(state);
+        AES8_InvMixColumns(state);
+        AES8_InvMixColumns(rk[r]);
+        AES8_AddRoundKey(state, rk[r]);
+    }
+
+    AES8_InvSubbytes(state);
+    AES8_InvShiftRows(state);
+    AES8_AddRoundKey(state, rk[0]);
+
+    for (int i=0; i<16; i++)
+        dec[i] = state[i];
+}
 void AES32_Test() {
 
     u8 pt[16] = {   0x00, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77, 0x88, 0x99, 0xaa, 0xbb, 0xcc, 0xdd, 0xee, 0xff };
-    u8 ct[16]; int count = 0; u8 ciphertext[16] = {0x69, 0xc4, 0xe0, 0xd8, 0x6a, 0x7b, 0x04, 0x30, 0xd8, 0xcd, 0xb7, 0x80, 0x70, 0xb4, 0xc5, 0x5a};
-    u8 rk[11][16]    = { { 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f },  
-                            { 0xd6, 0xaa, 0x74, 0xfd, 0xd2, 0xaf, 0x72, 0xfa, 0xda, 0xa6, 0x78, 0xf1, 0xd6, 0xab, 0x76, 0xfe },  
-                            { 0xb6, 0x92, 0xcf, 0x0b, 0x64, 0x3d, 0xbd, 0xf1, 0xbe, 0x9b, 0xc5, 0x00, 0x68, 0x30, 0xb3, 0xfe },  
-                            { 0xb6, 0xff, 0x74, 0x4e, 0xd2, 0xc2, 0xc9, 0xbf, 0x6c, 0x59, 0x0c, 0xbf, 0x04, 0x69, 0xbf, 0x41 },  
-                            { 0x47, 0xf7, 0xf7, 0xbc, 0x95, 0x35, 0x3e, 0x03, 0xf9, 0x6c, 0x32, 0xbc, 0xfd, 0x05, 0x8d, 0xfd },  
-                            { 0x3c, 0xaa, 0xa3, 0xe8, 0xa9, 0x9f, 0x9d, 0xeb, 0x50, 0xf3, 0xaf, 0x57, 0xad, 0xf6, 0x22, 0xaa },  
-                            { 0x5e, 0x39, 0x0f, 0x7d, 0xf7, 0xa6, 0x92, 0x96, 0xa7, 0x55, 0x3d, 0xc1, 0x0a, 0xa3, 0x1f, 0x6b }, 
-                            { 0x14, 0xf9, 0x70, 0x1a, 0xe3, 0x5f, 0xe2, 0x8c, 0x44, 0x0a, 0xdf, 0x4d, 0x4e, 0xa9, 0xc0, 0x26 }, 
-                            { 0x47, 0x43, 0x87, 0x35, 0xa4, 0x1c, 0x65, 0xb9, 0xe0, 0x16, 0xba, 0xf4, 0xae, 0xbf, 0x7a, 0xd2 }, 
-                            { 0x54, 0x99, 0x32, 0xd1, 0xf0, 0x85, 0x57, 0x68, 0x10, 0x93, 0xed, 0x9c, 0xbe, 0x2c, 0x97, 0x4e }, 
-                            { 0x13, 0x11, 0x1d, 0x7f, 0xe3, 0x94, 0x4a, 0x17, 0xf3, 0x07, 0xa7, 0x8b, 0x4d, 0x2b, 0x30, 0xc5 }  };
+    u8 k[16] = { 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f };
+    u8 ct[16]; 
+    u8 rk[11][16];
     u32 roundKey[11][4];
+    u8 ciphertext[16] = {0x69, 0xc4, 0xe0, 0xd8, 0x6a, 0x7b, 0x04, 0x30, 0xd8, 0xcd, 0xb7, 0x80, 0x70, 0xb4, 0xc5, 0x5a};
+    u8 dec[16];
+    int count;
 
-    // rk[11][16] -> roundKey[11][4]
-    for (int i=0; i<11; i++) byte2state(rk[i], roundKey[i]);
+    // k[16] -> roundKey[11][4]
+    AES32_KeySchedule(k, roundKey);
 
     // AES Encryption
     AES32_Enc(pt, roundKey, ct);
 
     // Plaintext  출력
     printf("PT = ");
-    for (int i=0; i<16; i++) printf("%02x ", pt[i]); printf("\n");
+    for (int i=0; i<16; i++) 
+        printf("%02x ", pt[i]); 
+    printf("\n");
     
     // Ciphertext 출력
-    printf("CT = "); for (int i=0; i<16; i++) {
+    printf("CT = "); 
+    for (int i=0; i<16; i++) {
         printf("%02x ", ct[i]);
-        if (ct[i] == ciphertext[i]) count++;
+        if (ct[i] == ciphertext[i]) 
+            count++;
     } printf("\n");
 
     // Test vector veridation
-    if (count == 16) printf("** 암호화 성공 **\n");
-    else printf("** 암호화 실패 **\n");
-}
+    count = 0;
+    for (int i=0; i<16; i++)
+        if (ct[i] == ciphertext[i]) 
+            count++;
 
-void printstate(u32 state[4]) {
-    for (int i=0; i<4; i++) printf("%08x ", state[i]); printf("\n");
-}
+    if (count == 16) 
+        printf("** 암호화 성공 **\n");
+    else 
+        printf("** 암호화 실패 **\n");
 
+    // AES Decryption
+    AES8_Dec(ct, k, dec);
+
+    // Decrypted text  출력
+    printf("DEC = ");
+    for (int i=0; i<16; i++) 
+        printf("%02x ", dec[i]); 
+    printf("\n");
+
+    // Test vector veridation
+    count = 0;
+    for (int i=0; i<16; i++)
+        if (dec[i] == pt[i]) 
+            count++;
+
+    if (count == 16) 
+        printf("** 복호화 성공 **\n");
+    else 
+        printf("** 복호화 실패 **\n");
+
+
+}
 
 
 int main() {
