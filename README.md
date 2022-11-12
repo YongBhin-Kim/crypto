@@ -21,13 +21,19 @@
 - - 경로  `AES/AES32`
 - - 명령어 `make` -> `./AES32`
 
+**[Coming soon]**
+
+Implementation and test vectors for various modes of AES will be provided. <br>
+Mode Of Operation Test : ECB, CBC, OFB, CFB, CTR, GCM <br>
+
+
 <h3/>대칭키 암호</h3>
 
 **[AES]** <br>
 대칭키 암호인 AES는 10라운드로 구성되며 `key gen` -> `1Round` -> `2Round` -> ... -> `10Round` 순으로 진행된다.<br>
 1라운드 시작 전 `AddRoundKey` 연산을 1회 진행한다. <br>
 각 라운드에서 `SBox` -> `ShiftRow` -> `Mixcolumns` -> `AddRoundKey` 순으로 진행된다. <br>
-마지막 라운드 (10Round)에서는 `Mixcolumns` 연산을 제외한다.
+마지막 라운드 (10Round)에서는 AES의 대칭성을 고려하여 `Mixcolumns` 연산을 제외한다.<br>
 <br>
 
 **AES 8비트** <br>
@@ -90,5 +96,48 @@ AES의 10라운드는 MixColumns 연산이 제외되므로 고정된 행렬을 �
 - use `pre-computated Table 0~3` : 1-9 Round 0-4 Column 에 해당하는 Table
 - use `pre-computated Table 4` : 10 Round 0~4열에 해당하는 Table
 <br>
+
+- **(Key Scheduling)**
+- AES의 key generation에 해당하는 부분 <br>
+1 Round 이전, 10 Round Whitening Key로 이용하기 위해 AES-128 기준 44 word (32비트 : 11 * 4 word, 8비트 : 11 * 16 byte) 로 구성한다.
+<br>
+
+
+**AES 복호화** <br>
+AES의 복호화를 위해 AES의 대칭성에 대하여 알아야 한다. <br>
+AES의 10라운드에는 MixColumns이 없으므로 복호화는 `InvAddroundKey --> InvShiftRows --> InvSubBytes --> InvMixColumns --> InvAddroundKey -->` 순으로 진행된다. <br>
+<br>
+
+- **(Addroundkey)**
+- AddRoundKey xor 연산이므로 그 역또한 xor 연산이다. 
+- 따라서 복호화는  `AddroundKey --> InvShiftRows --> InvSubBytes --> InvMixColumns --> AddroundKey` 으로 표현 가능하다. <br>
+<br>
+
+- **(InvSubBytes)**
+- SubBytes의 SBox의 역인 InvSBox로 대체하여 계산한다.
+<br>
+
+- **(InvShiftRow)**
+- AES의 `InvShiftRows` 연산은 `ShiftRows`의 역연산으로 1행을 0번, 2행을 1번, 3행을 2번, 4행을 3번 right rotation 연산하며 이는 선형성의 특징이 있다.<br>
+  ```row_1 = row_1 <<< 0
+  row_2 = row_2 <<< 1
+  row_3 = row_3 <<< 2
+  row_4 = row_4 <<< 3
+  ``` 
+<br>
+
+- **(InvMixColumns)**
+- `InvMixColumns` 연산은 `MixColumns`의 역연산으로, MixColumns의 `fixed_a(x) = 0x03 x^3 + 0x01 x^2 + 0x01 x + 0x02` GF(2^8)^4에서의 역원을 구하면 `0x0b x^3 + 0x0d x^2 + 0x09 x + 0x0e` 이므로 InvMixColumns의 `fixed_a(x) = 0x0b x^3 + 0x0d x^2 + 0x09 x + 0x0e`로 사용하면 MixColumns의 역연산이 된다. 따라서, MixColumns가 선형 연산이기 때문에 InvMixColumns 연산 또한 선형 연산이다. <br>
+<br>
+
+`InvShiftRows` 연산과 `InvSubBytes` 연산의 순서는 바뀌어도 무관하기 때문에 `InvShiftRows --> InvSubBytes == InvSubBytes --> InvShiftRows` 로 조정 가능하다. <br>
+`MixColumns` 는 선형 연산이라 했으므로 `AddRoundKey --> MixColumns` : `ARK(MC(state), rk) == MC(state) ^ rk == MC(state ^ InvMC(rk)) == MC(state ^ rk_prime) == MixColumns --> AddRoundKey_prime` 으로 표현 가능하며, 따라서 AddRoundKey와 MixColumns 연산의 순서 또한 자유롭게 조정 가능하다. <br>
+따라서 복호화 순서는 다음과 같이 변경 가능하다. <br>
+```
+AddRoundKey --> InvSubBytes --> InvShiftRows --> 
+InvMixColumns --> AddRoundKey_prime --> InvSubBytes --> ... --> InvSubBytes --> InvShiftRows --> InvMixColumns --> AddRoundKey_prime --> 
+InvShiftRows --> InvSubBytes --> AddRoundKey
+```
+형태를 살펴보면 `AddRoundKey` 연산 1회 , 9~1 라운드 `InvSubBytes --> InvShiftRows --> InvMixColumns --> AddRoundKey_prime` 연산, 0 라운드 `InvShiftRows --> InvSubBytes --> AddRoundKey` 순서로 진행 가능하다. <br>
 
 
