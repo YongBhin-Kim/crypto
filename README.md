@@ -104,6 +104,7 @@ AES의 10라운드는 MixColumns 연산이 제외되므로 고정된 행렬을 �
 
 
 **AES 복호화** <br>
+
 AES의 복호화를 위해 AES의 대칭성에 대하여 알아야 한다. <br>
 AES의 10라운드에는 MixColumns이 없으므로 복호화는 `InvAddroundKey --> InvShiftRows --> InvSubBytes --> InvMixColumns --> InvAddroundKey -->` 순으로 진행된다. <br>
 <br>
@@ -119,10 +120,10 @@ AES의 10라운드에는 MixColumns이 없으므로 복호화는 `InvAddroundKey
 
 - **(InvShiftRow)**
 - AES의 `InvShiftRows` 연산은 `ShiftRows`의 역연산으로 1행을 0번, 2행을 1번, 3행을 2번, 4행을 3번 right rotation 연산하며 이는 선형성의 특징이 있다.<br>
-  ```row_1 = row_1 <<< 0
-  row_2 = row_2 <<< 1
-  row_3 = row_3 <<< 2
-  row_4 = row_4 <<< 3
+  ```row_1 = row_1 >>> 0
+  row_2 = row_2 >>> 1
+  row_3 = row_3 >>> 2
+  row_4 = row_4 >>> 3
   ``` 
 <br>
 
@@ -134,10 +135,10 @@ AES의 10라운드에는 MixColumns이 없으므로 복호화는 `InvAddroundKey
 `MixColumns` 는 선형 연산이라 했으므로 `AddRoundKey --> MixColumns` : `ARK(MC(state), rk) == MC(state) ^ rk == MC(state ^ InvMC(rk)) == MC(state ^ rk_prime) == MixColumns --> AddRoundKey_prime` 으로 표현 가능하며, 따라서 AddRoundKey와 MixColumns 연산의 순서 또한 자유롭게 조정 가능하다. <br>
 따라서 복호화 순서는 다음과 같이 변경 가능하다. <br>
 ```
-AddRoundKey --> InvSubBytes --> InvShiftRows --> 
-InvMixColumns --> AddRoundKey_prime --> InvSubBytes --> ... --> InvSubBytes --> InvShiftRows --> InvMixColumns --> AddRoundKey_prime --> 
-InvShiftRows --> InvSubBytes --> AddRoundKey
+AddRoundKey --> 
+InvSubBytes --> InvShiftRows --> InvMixColumns --> AddRoundKey_prime --> ... --> AddRoundKey_prime --> 
+InvSubBytes --> InvShiftRows --> AddRoundKey
 ```
-형태를 살펴보면 `AddRoundKey` 연산 1회 , 9~1 라운드 `InvSubBytes --> InvShiftRows --> InvMixColumns --> AddRoundKey_prime` 연산, 0 라운드 `InvShiftRows --> InvSubBytes --> AddRoundKey` 순서로 진행 가능하다. <br>
+형태를 살펴보면 `AddRoundKey` 연산 1회 , 9~1 라운드 `InvSubBytes --> InvShiftRows --> InvMixColumns --> AddRoundKey_prime` 연산, 0 라운드 `InvSubBytes --> InvShiftRows --> AddRoundKey` 순서로 진행 가능하다. <br>
 
 
