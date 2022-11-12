@@ -140,5 +140,12 @@ InvSubBytes --> InvShiftRows --> InvMixColumns --> AddRoundKey_prime --> ... -->
 InvSubBytes --> InvShiftRows --> AddRoundKey
 ```
 형태를 살펴보면 `AddRoundKey` 연산 1회 , 9~1 라운드 `InvSubBytes --> InvShiftRows --> InvMixColumns --> AddRoundKey_prime` 연산, 0 라운드 `InvSubBytes --> InvShiftRows --> AddRoundKey` 순서로 진행 가능하다. <br>
+<br>
 
+**Mode Of Operation** <br>
 
+- **(AES-ECB)**
+- CAVP - KAT Test
+
+- **(AES-CBC)**
+- CAVP - MMT Test
