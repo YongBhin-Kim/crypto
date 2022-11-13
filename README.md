@@ -146,7 +146,10 @@ AddRoundKey -->
 InvSubBytes --> InvShiftRows --> InvMixColumns --> AddRoundKey_prime --> ... --> AddRoundKey_prime --> 
 InvSubBytes --> InvShiftRows --> AddRoundKey
 ```
-형태를 살펴보면 `AddRoundKey` 연산 1회 , 9~1 라운드 `InvSubBytes --> InvShiftRows --> InvMixColumns --> AddRoundKey_prime` 연산, 0 라운드 `InvSubBytes --> InvShiftRows --> AddRoundKey` 순서로 진행 가능하다. <br>
+정리하면 AES 복호화는 다음과 같은 순서로 진행된다. <br>
+10 Round  : `AddRoundKey` <br>
+9~1 Round : `InvSubBytes --> InvShiftRows --> InvMixColumns --> AddRoundKey_prime` <br>
+0 Round   : `InvSubBytes --> InvShiftRows --> AddRoundKey` <br>
 <br>
 
 **Mode Of Operation** <br>
