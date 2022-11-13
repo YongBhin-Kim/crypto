@@ -149,3 +149,5 @@ InvSubBytes --> InvShiftRows --> AddRoundKey
 
 - **(AES-CBC)**
 - CAVP - MMT Test
+
+- **(AES-GCM)**
