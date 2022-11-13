@@ -132,7 +132,14 @@ AES의 10라운드에는 MixColumns이 없으므로 복호화는 `InvAddroundKey
 <br>
 
 `InvShiftRows` 연산과 `InvSubBytes` 연산의 순서는 바뀌어도 무관하기 때문에 `InvShiftRows --> InvSubBytes == InvSubBytes --> InvShiftRows` 로 조정 가능하다. <br>
-`MixColumns` 는 선형 연산이라 했으므로 `AddRoundKey --> MixColumns` : `ARK(MC(state), rk) == MC(state) ^ rk == MC(state ^ InvMC(rk)) == MC(state ^ rk_prime) == MixColumns --> AddRoundKey_prime` 으로 표현 가능하며, 따라서 AddRoundKey와 MixColumns 연산의 순서 또한 자유롭게 조정 가능하다. <br>
+`MixColumns` 는 선형 연산이라 했으므로 
+`AddRoundKey --> MixColumns` <br>
+ == `ARK(MC(state), rk)` <br>
+ == `MC(state) ^ rk` <br>
+ == `MC(state ^ InvMC(rk)) ` <br>
+ == `MC(state ^ rk_prime) ` <br>
+ == `MixColumns --> AddRoundKey_prime` <br>
+으로 표현 가능하며, 따라서 AddRoundKey와 MixColumns 연산의 순서 또한 자유롭게 조정 가능하다. <br>
 따라서 복호화 순서는 다음과 같이 변경 가능하다. <br>
 ```
 AddRoundKey --> 
