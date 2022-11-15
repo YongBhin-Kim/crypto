@@ -24,9 +24,11 @@
 
 **[Coming soon]**
 
-Implementation and test vectors for various modes of AES will be provided. <br>
-Mode Of Operation Test : ECB, CBC, OFB, CFB, CTR, GCM <br>
-
+- Implementation and test vectors for various modes of AES will be provided. <br>
+- - Mode Of Operation Test : ECB, CBC, OFB, CFB, CTR, GCM <br>
+- Gray box 
+- - FOCPA(First Order Correlation Power Attack) <br>
+- - Masked AES resistant to FOCPA
 
 <h3/>대칭키 암호</h3>
 
