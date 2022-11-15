@@ -164,3 +164,13 @@ InvSubBytes --> InvShiftRows --> AddRoundKey
 - CAVP - MMT Test
 
 - **(AES-GCM)**
+<br>
+
+**AES Gray box** <br>
+
+AES는 현재까지 존재하는 다양한 대칭키 암호 공격에 안전하다. 
+하지만 AES 작동 시에 다양한 연산이 진행되며 이 때 발생하는 소비전력 등을 분석하는 관점에서는 순수한 AES가 안전하지 않을 수 있다.
+<br>
+
+- **(AES FOCPA(First Order Correlation Power Attack))**
+- **(Masked AES resistant to FOCPA)** 
