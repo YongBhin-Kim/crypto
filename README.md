@@ -2,7 +2,6 @@
 현대 암호와 사용되는 수학
 
 
-
 **[Environment]**
 - Visual Studio Code 2
 
@@ -154,6 +153,11 @@ InvSubBytes --> InvShiftRows --> AddRoundKey
 10 Round  : `AddRoundKey` <br>
 9~1 Round : `InvSubBytes --> InvShiftRows --> InvMixColumns --> AddRoundKey_prime` <br>
 0 Round   : `InvSubBytes --> InvShiftRows --> AddRoundKey` <br>
+<br>
+
+**AES key Schedule property** <br>
+
+- AES의 임의의 라운드 키를 이용하여 모든 라운드 키를 찾을 수 있다. <br>
 <br>
 
 **Mode Of Operation** <br>
