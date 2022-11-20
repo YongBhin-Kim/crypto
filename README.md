@@ -22,6 +22,8 @@
 - - 경로  `AES/AES32`
 - - 명령어 `make` -> `./AES32`
 
+- ARIA
+
 **[Coming soon]**
 
 - Implementation and test vectors for various modes of AES will be provided. <br>
@@ -29,6 +31,7 @@
 - Gray box 
 - - FOCPA(First Order Correlation Power Attack) <br>
 - - Masked AES resistant to FOCPA
+- ARIA 
 
 <h3/>대칭키 암호</h3>
 
