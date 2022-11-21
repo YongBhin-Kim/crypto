@@ -1,6 +1,7 @@
 # Crypto
 현대 암호와 사용되는 수학
 
+
 **[Environment]**
 - Visual Studio Code 2
 
@@ -21,11 +22,16 @@
 - - 경로  `AES/AES32`
 - - 명령어 `make` -> `./AES32`
 
+- ARIA
+
 **[Coming soon]**
 
-Implementation and test vectors for various modes of AES will be provided. <br>
-Mode Of Operation Test : ECB, CBC, OFB, CFB, CTR, GCM <br>
-
+- Implementation and test vectors for various modes of AES will be provided. <br>
+- - Mode Of Operation Test : ECB, CBC, OFB, CFB, CTR, GCM <br>
+- Gray box 
+- - FOCPA(First Order Correlation Power Attack) <br>
+- - Masked AES resistant to FOCPA
+- ARIA 
 
 <h3/>대칭키 암호</h3>
 
@@ -41,7 +47,7 @@ Mode Of Operation Test : ECB, CBC, OFB, CFB, CTR, GCM <br>
 AES의 SBox 연산은 유한체인 Rijndael Field (GF(2^8)) 에서 다루어지므로 기존의 연산과 다른 Quotient Field : GF(2^8) = GF(2)[x]/<m(x)>; 계수 = 0 or 1; 위에서의 연산으로 이루어진다. 따라서 GF(2^8) 위에서의 연산의 구현이 필요하다. <br> AES의 GF(2^8) 위에서의 기약다항식 m(x)는 x^8 + x^4 + x^3 + x + 1 으로 사용한다. <br>
 
 - **(유한체 연산)**
-- - 유한체 합연산 == 유한체 차연산 (유한체의 덧셈의 역원은 자기 자신이므로)
+- - 유한체 합연산 == 유한체 차연산 (계수가 GF(2)의 원소인 유한체 원소의 덧셈의 역원은 자기 자신이므로)
 - - 유한체 x배 == 유한체 2배
 - - 유한체 곱연산
 - - 유한체 나눗셈
@@ -104,6 +110,7 @@ AES의 10라운드는 MixColumns 연산이 제외되므로 고정된 행렬을 �
 
 
 **AES 복호화** <br>
+
 AES의 복호화를 위해 AES의 대칭성에 대하여 알아야 한다. <br>
 AES의 10라운드에는 MixColumns이 없으므로 복호화는 `InvAddroundKey --> InvShiftRows --> InvSubBytes --> InvMixColumns --> InvAddroundKey -->` 순으로 진행된다. <br>
 <br>
@@ -119,10 +126,10 @@ AES의 10라운드에는 MixColumns이 없으므로 복호화는 `InvAddroundKey
 
 - **(InvShiftRow)**
 - AES의 `InvShiftRows` 연산은 `ShiftRows`의 역연산으로 1행을 0번, 2행을 1번, 3행을 2번, 4행을 3번 right rotation 연산하며 이는 선형성의 특징이 있다.<br>
-  ```row_1 = row_1 <<< 0
-  row_2 = row_2 <<< 1
-  row_3 = row_3 <<< 2
-  row_4 = row_4 <<< 3
+  ```row_1 = row_1 >>> 0
+  row_2 = row_2 >>> 1
+  row_3 = row_3 >>> 2
+  row_4 = row_4 >>> 3
   ``` 
 <br>
 
@@ -131,13 +138,47 @@ AES의 10라운드에는 MixColumns이 없으므로 복호화는 `InvAddroundKey
 <br>
 
 `InvShiftRows` 연산과 `InvSubBytes` 연산의 순서는 바뀌어도 무관하기 때문에 `InvShiftRows --> InvSubBytes == InvSubBytes --> InvShiftRows` 로 조정 가능하다. <br>
-`MixColumns` 는 선형 연산이라 했으므로 `AddRoundKey --> MixColumns` : `ARK(MC(state), rk) == MC(state) ^ rk == MC(state ^ InvMC(rk)) == MC(state ^ rk_prime) == MixColumns --> AddRoundKey_prime` 으로 표현 가능하며, 따라서 AddRoundKey와 MixColumns 연산의 순서 또한 자유롭게 조정 가능하다. <br>
+`MixColumns` 는 선형 연산이라 했으므로 
+`AddRoundKey --> MixColumns` <br>
+ == `ARK(MC(state), rk)` <br>
+ == `MC(state) ^ rk` <br>
+ == `MC(state ^ InvMC(rk)) ` <br>
+ == `MC(state ^ rk_prime) ` <br>
+ == `MixColumns --> AddRoundKey_prime` <br>
+으로 표현 가능하며, 따라서 AddRoundKey와 MixColumns 연산의 순서 또한 자유롭게 조정 가능하다. <br>
 따라서 복호화 순서는 다음과 같이 변경 가능하다. <br>
 ```
-AddRoundKey --> InvSubBytes --> InvShiftRows --> 
-InvMixColumns --> AddRoundKey_prime --> InvSubBytes --> ... --> InvSubBytes --> InvShiftRows --> InvMixColumns --> AddRoundKey_prime --> 
-InvShiftRows --> InvSubBytes --> AddRoundKey
+AddRoundKey --> 
+InvSubBytes --> InvShiftRows --> InvMixColumns --> AddRoundKey_prime --> ... --> AddRoundKey_prime --> 
+InvSubBytes --> InvShiftRows --> AddRoundKey
 ```
-형태를 살펴보면 `AddRoundKey` 연산 1회 , 9~1 라운드 `InvSubBytes --> InvShiftRows --> InvMixColumns --> AddRoundKey_prime` 연산, 0 라운드 `InvShiftRows --> InvSubBytes --> AddRoundKey` 순서로 진행 가능하다. <br>
+정리하면 AES 복호화는 다음과 같은 순서로 진행된다. <br>
+10 Round  : `AddRoundKey` <br>
+9~1 Round : `InvSubBytes --> InvShiftRows --> InvMixColumns --> AddRoundKey_prime` <br>
+0 Round   : `InvSubBytes --> InvShiftRows --> AddRoundKey` <br>
+<br>
 
+**AES key Schedule property** <br>
 
+- AES의 임의의 라운드 키를 이용하여 모든 라운드 키를 찾을 수 있다. <br>
+<br>
+
+**Mode Of Operation** <br>
+
+- **(AES-ECB)**
+- CAVP - KAT Test
+
+- **(AES-CBC)**
+- CAVP - MMT Test
+
+- **(AES-GCM)**
+<br>
+
+**AES Gray box** <br>
+
+AES는 현재까지 존재하는 다양한 대칭키 암호 공격에 안전하다. 
+하지만 AES 작동 시에 다양한 연산이 진행되며 이 때 발생하는 소비전력 등을 분석하는 관점에서는 순수한 AES가 안전하지 않을 수 있다.
+<br>
+
+- **(AES FOCPA(First Order Correlation Power Attack))**
+- **(Masked AES resistant to FOCPA)** 
