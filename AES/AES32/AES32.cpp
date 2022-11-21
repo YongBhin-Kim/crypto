@@ -220,13 +220,13 @@ void AES32_Test() {
     // AES Encryption
     AES32_Enc(pt, roundKey, ct);
 
-    // Plaintext  출력
+    // Print Plaintext
     printf("PT = ");
     for (int i=0; i<16; i++) 
         printf("%02x ", pt[i]); 
     printf("\n");
     
-    // Ciphertext 출력
+    // Print Ciphertext
     printf("CT = "); 
     for (int i=0; i<16; i++) {
         printf("%02x ", ct[i]);
@@ -268,7 +268,8 @@ void AES32_Test() {
 
 }
 
-
+#if 0
 int main() {
     AES32_Test();
 }
+#endif
