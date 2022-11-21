@@ -80,6 +80,7 @@ AES의 SBox 연산은 유한체인 Rijndael Field (GF(2^8)) 에서 다루어지�
 - AES의 MixColumns 연산은 Quotient Ring : GF(2^8)^4 = GF(2^8)[x]/<x^4 + 1>; 계수 = 0 or 1 or 2 or ... or 255; 위에서의 연산으로 이루어진다. <br>
 Quotient Ring의 원소인 fixed_a(x) = (a0 a1 a2 a3) (== (3 1 1 2)) 의 계수 ai는 GF(2^8)의 원소이다. 즉 0~255 사이의 숫자이며, 각각 일대일 대응되는 다항식을 가진다. <br> 선형 변환인 MixColumns는 행렬로 표현 가능하며 quotient ring GF(2^8)^4 위에서의 연산을 이용하여 AES Mincolumns 연산을 구현한다. 행렬 연산의 원소들은 각각 GF(2^8)의 원소이므로 원소들의 연산도 유한체 위에서의 연산으로 진행한다.
 - `fixed_a(x) = 0x03 x^3 + 0x01 x^2 + 0x01 x + 0x02`
+- - 위의 다항식은 gcd(mixcol_poly, primitive_poly) = 1 이어서 Extended Euclidean Algorithm에 의해 inverse mixcol_poly가 존재하며 구할 수 있고, 따라서 AES의 복호화가 가능하도록 선정한 다항식이다.
 - `output_column_vector = fixed_Matrix_MC * input_column_vector`
 <br>
 
