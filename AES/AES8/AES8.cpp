@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdio.h>
 #include "AES8.h"
 
 /**
@@ -128,7 +129,7 @@ void AddRoundKey(byte state[16], byte roundkey[16]) {
 }
 
 // AES8 Encrypt
-void AES_Encrypt(byte PT[16], byte K[16], byte CT[16]) {
+void AES8_Enc(byte PT[16], byte K[16], byte CT[16]) {
     byte state[16];
     for (int i=0; i<16; i++) 
         state[i] = PT[i];
@@ -257,7 +258,7 @@ void Run_AES8_test() {
     printf("\n\n");
     
     // AES Encryption
-    AES_Encrypt(pt, k, ct);
+    AES8_Enc(pt, k, ct);
 
     // Print Ciphertext
     printf("CT = ");
@@ -305,7 +306,9 @@ void Run_AES8_test() {
 }
 
 // main function
+/*
 int main()
 {
     Run_AES8_test();
 }
+*/

@@ -1,3 +1,4 @@
+#ifndef _AES8_
 #pragma once
 // 유한체 GF(2^8) 계산 헤더
 // #include "../Math/GF_Math.h"
@@ -74,7 +75,7 @@ void SubBytes(byte state[16]);
 void ShiftRows(byte state[16]);
 void MixClomuns(byte state[16]);
 void AddRoundKey(byte state[16], byte roundkey[16]);
-void AES_Encrypt(byte PT[16], byte K[16], byte CT[16]);
+void AES8_Enc(byte PT[16], byte K[16], byte CT[16]);
 
 
 void AES8_InvSubbytes(u8 state[16]);
@@ -85,3 +86,4 @@ void AES8_Dec(u8 ct[16], u8 k[16], u8 dec[16]);
 
 void print(byte state[16]);
 void Run_AES8_test();
+#endif
