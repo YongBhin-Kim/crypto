@@ -83,6 +83,8 @@ Quotient Ring의 원소인 fixed_a(x) = (a0 a1 a2 a3) (== (3 1 1 2)) 의 계수 
 - - 위의 다항식은 gcd(mixcol_poly, primitive_poly) = 1 이어서 Extended Euclidean Algorithm에 의해 inverse mixcol_poly가 존재하며 구할 수 있고, 따라서 AES의 복호화가 가능하도록 선정한 다항식이다.
 - - 위의 다항식은 branch bumber = 5가 되도록 선정하였다.
 - - 위의 다항식은 연산의 편의성을 고려하여 선정한 다항식이다.
+- - 위의 다항식은 Invmixcol_poly = mixcol_poly * primitive_poly 식이 성립한다.
+- - 위의 다항식은 I = mixcol_poly ** 4 식이 성립한다.
 - `output_column_vector = fixed_Matrix_MC * input_column_vector`
 <br>
 
