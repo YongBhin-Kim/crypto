@@ -22,12 +22,14 @@
 - - 경로  `AES/AES32`
 - - 명령어 `make` -> `./AES32`
 
+- BCM(Block Cipher Mode)
+- - 경로 `AES/Mode`
+- - 명령어 `make` -> `./ECB_CBC`
+
 - ARIA
 
 **[Coming soon]**
 
-- Implementation and test vectors for various modes of AES will be provided. <br>
-- - Mode Of Operation Test : ECB, CBC, OFB, CFB, CTR, GCM <br>
 - Gray box 
 - - FOCPA(First Order Correlation Power Attack) <br>
 - - Masked AES resistant to FOCPA
@@ -168,7 +170,10 @@ InvSubBytes --> InvShiftRows --> AddRoundKey
 - AES의 임의의 라운드 키를 이용하여 모든 라운드 키를 찾을 수 있다. <br>
 <br>
 
-**Mode Of Operation** <br>
+**Mode Of Operation, BCM(Block Cipher Mode)** <br>
+
+- Implementation and test vectors for various modes of AES will be provided. <br>
+- - Mode Of Operation Test : ECB, CBC, OFB, CFB, CTR, GCM <br>
 
 - **(AES-ECB)**
 - CAVP - KAT Test
