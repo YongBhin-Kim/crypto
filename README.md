@@ -23,8 +23,8 @@
 - - 명령어 `make` -> `./AES32`
 
 - BCM(Block Cipher Mode)
-- - 경로 `AES/Mode`
-- - 명령어 `make` -> `./ECB_CBC`
+- - 경로 `AES/Mode/~`
+- - 명령어 `make` -> `./~`
 
 - ARIA
 
@@ -177,9 +177,11 @@ InvSubBytes --> InvShiftRows --> AddRoundKey
 
 - **(AES-ECB)**
 - CAVP - KAT Test
-
+- CAVP - MCT Test
 - **(AES-CBC)**
 - CAVP - MMT Test
+- - Versus ECB
+- CAVP - MCT Test
 
 - **(AES-GCM)**
 <br>
