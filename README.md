@@ -22,12 +22,14 @@
 - - 경로  `AES/AES32`
 - - 명령어 `make` -> `./AES32`
 
+- BCM(Block Cipher Mode)
+- - 경로 `AES/Mode`
+- - 명령어 `make` -> `./ECB_CBC`
+
 - ARIA
 
 **[Coming soon]**
 
-- Implementation and test vectors for various modes of AES will be provided. <br>
-- - Mode Of Operation Test : ECB, CBC, OFB, CFB, CTR, GCM <br>
 - Gray box 
 - - FOCPA(First Order Correlation Power Attack) <br>
 - - Masked AES resistant to FOCPA
@@ -80,6 +82,11 @@ AES의 SBox 연산은 유한체인 Rijndael Field (GF(2^8)) 에서 다루어지�
 - AES의 MixColumns 연산은 Quotient Ring : GF(2^8)^4 = GF(2^8)[x]/<x^4 + 1>; 계수 = 0 or 1 or 2 or ... or 255; 위에서의 연산으로 이루어진다. <br>
 Quotient Ring의 원소인 fixed_a(x) = (a0 a1 a2 a3) (== (3 1 1 2)) 의 계수 ai는 GF(2^8)의 원소이다. 즉 0~255 사이의 숫자이며, 각각 일대일 대응되는 다항식을 가진다. <br> 선형 변환인 MixColumns는 행렬로 표현 가능하며 quotient ring GF(2^8)^4 위에서의 연산을 이용하여 AES Mincolumns 연산을 구현한다. 행렬 연산의 원소들은 각각 GF(2^8)의 원소이므로 원소들의 연산도 유한체 위에서의 연산으로 진행한다.
 - `fixed_a(x) = 0x03 x^3 + 0x01 x^2 + 0x01 x + 0x02`
+- - 위의 다항식은 gcd(mixcol_poly, primitive_poly) = 1 이어서 Extended Euclidean Algorithm에 의해 inverse mixcol_poly가 존재하며 구할 수 있고, 따라서 AES의 복호화가 가능하도록 선정한 다항식이다.
+- - 위의 다항식은 branch bumber = 5가 되도록 선정하였다.
+- - 위의 다항식은 연산의 편의성을 고려하여 선정한 다항식이다.
+- - 위의 다항식은 Invmixcol_poly = mixcol_poly * primitive_poly 식이 성립한다.
+- - 위의 다항식은 I = mixcol_poly ** 4 식이 성립한다.
 - `output_column_vector = fixed_Matrix_MC * input_column_vector`
 <br>
 
@@ -163,7 +170,10 @@ InvSubBytes --> InvShiftRows --> AddRoundKey
 - AES의 임의의 라운드 키를 이용하여 모든 라운드 키를 찾을 수 있다. <br>
 <br>
 
-**Mode Of Operation** <br>
+**Mode Of Operation, BCM(Block Cipher Mode)** <br>
+
+- Implementation and test vectors for various modes of AES will be provided. <br>
+- - Mode Of Operation Test : ECB, CBC, OFB, CFB, CTR, GCM <br>
 
 - **(AES-ECB)**
 - CAVP - KAT Test
