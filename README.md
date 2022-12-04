@@ -3,7 +3,8 @@
 
 
 **[Environment]**
-- MacOS Visual Studio Code 2
+- MacOS
+- Visual Studio Code 2
 
 **[Language]**
 - C
