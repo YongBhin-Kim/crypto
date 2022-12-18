@@ -1,7 +1,6 @@
 # Crypto
 현대 암호와 사용되는 수학
 
-
 **[Environment]**
 - MacOS
 - Visual Studio Code 2
@@ -27,6 +26,7 @@
 - - 경로 `AES/Mode/~`
 - - 명령어 `make` -> `./~`
 
+- AES
 - ARIA
 
 
