@@ -1,5 +1,5 @@
-# Crypto
-현대 암호와 사용되는 수학
+# Crypto - AES
+현대 암호와 사용되는 수학 - AES
 
 **[Environment]**
 - MacOS
