@@ -13,7 +13,7 @@
 - C style implementation
 - C++ implemtation using Class
 
-**[Run]**
+**[Compile & Run]**
 - AES8 
 - - 경로  `AES/AES8`
 - - 명령어 `make` -> `./AES8`
@@ -26,16 +26,14 @@
 - - 경로 `AES/Mode/~`
 - - 명령어 `make` -> `./~`
 
-- AES
-- ARIA
 
 
 **[Coming soon]**
 
 - Gray box 
 - - FOCPA(First Order Correlation Power Attack) <br>
-- - Masked AES resistant to FOCPA
-- ARIA 
+- - Implementation of masked AES resistant to FOCPA
+
 
 <h3/>대칭키 암호</h3>
 
