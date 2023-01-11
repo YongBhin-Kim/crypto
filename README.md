@@ -1,19 +1,23 @@
-# Crypto
+# Symmetric cryptography - Providing AES, ARIA with used mathmatics
 현대 암호와 사용되는 수학
 
-
 **[Environment]**
+- MacOS
 - Visual Studio Code 2
 
 **[Language]**
 - C
 - C++
+- Python3
 
 **[Implementation]**
 - C style implementation
 - C++ implemtation using Class
+- Python implementation
 
-**[Run]**
+**[Compile & Run]**
+
+**AES**
 - AES8 
 - - 경로  `AES/AES8`
 - - 명령어 `make` -> `./AES8`
@@ -22,20 +26,39 @@
 - - 경로  `AES/AES32`
 - - 명령어 `make` -> `./AES32`
 
-- BCM(Block Cipher Mode)
-- - 경로 `AES/Mode`
-- - 명령어 `make` -> `./ECB_CBC`
+- AES BCM(Block Cipher Mode) (Providing ECB/CBC/(GCM))
+- - 경로 `AES/Mode/~`
+- - 명령어 `make` -> `./~`
 
-- ARIA
+
+**ARIA**
+- ARIA8 (C)
+- - 경로 `ARIA/aria/ARIA-C`
+- - 명령어 `make` -> `./aria_testrun`
+
+- ARIA Sbox (C)
+- - 경로 `ARIA/aria/ARIA-C`
+- - 명령어 `make` -> `./gen_sbox`
+
+- ARIA8 (Python)
+- - 경로 `ARIA/aria/ARIA-Py`
+- - 명령어 `python3 aria.py`
+
+- ARIA BCM(Block Cipher Mode) (Providing CTR)
+- - 경로 `ARIA/aria/ARIA-Mode`
+- - 명령어 `gcc -o [exec file name] aria_ctr_testrun.c`
+
+
 
 **[Coming soon]**
 
 - Gray box 
 - - FOCPA(First Order Correlation Power Attack) <br>
-- - Masked AES resistant to FOCPA
-- ARIA 
+- - Implementation of masked AES resistant to FOCPA
 
-<h3/>대칭키 암호</h3>
+
+# 대칭키 암호 AES
+
 
 **[AES]** <br>
 대칭키 암호인 AES는 10라운드로 구성되며 `key gen` -> `1Round` -> `2Round` -> ... -> `10Round` 순으로 진행된다.<br>
@@ -177,11 +200,15 @@ InvSubBytes --> InvShiftRows --> AddRoundKey
 
 - **(AES-ECB)**
 - CAVP - KAT Test
-
+- CAVP - MCT Test
 - **(AES-CBC)**
 - CAVP - MMT Test
+- - Versus ECB
+- CAVP - MCT Test
 
 - **(AES-GCM)**
+- CAVP
+
 <br>
 
 **AES Gray box** <br>
@@ -192,3 +219,11 @@ AES는 현재까지 존재하는 다양한 대칭키 암호 공격에 안전하�
 
 - **(AES FOCPA(First Order Correlation Power Attack))**
 - **(Masked AES resistant to FOCPA)** 
+
+
+
+
+# 대칭키 암호 ARIA
+
+- **(ARIA-CTR)**
+- CAVP
