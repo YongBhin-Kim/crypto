@@ -1,5 +1,7 @@
-# Symmetric cryptography - Providing AES, ARIA with used mathmatics
+# Symmetric cryptography - AES, ARIA
+<h3/> ( For AES, ARIA algorithm this repository provides algorithms, implementations, and mathematical techniques used ) </h3>
 현대 암호와 사용되는 수학
+
 
 **[Environment]**
 - MacOS
