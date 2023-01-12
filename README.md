@@ -13,8 +13,8 @@
 - Python3
 
 **[Implementation]**
-- C style implementation
-- C++ implemtation using Class
+- C implementation
+- C++ implemtation 
 - Python implementation
 
 **[Compile & Run]**
@@ -30,7 +30,7 @@
 
 - AES BCM(Block Cipher Mode) (Providing ECB/CBC/(GCM))
 - - 경로 `AES/Mode/~`
-- - 명령어 `make` -> `./~`
+- - 명령어 `make` -> `./[exec file]`
 
 
 **ARIA**
@@ -48,7 +48,7 @@
 
 - ARIA BCM(Block Cipher Mode) (Providing CTR)
 - - 경로 `ARIA/aria/ARIA-Mode`
-- - 명령어 `gcc -o [exec file name] aria_ctr_testrun.c`
+- - 명령어 `make` -> `./[exec file]`
 
 
 
