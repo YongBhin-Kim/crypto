@@ -40,7 +40,7 @@
 
 - ARIA Sbox (C)
 - - 경로 `ARIA/aria/ARIA-C`
-- - 명령어 `make` -> `./gen_sbox`
+- - 명령어 `make` -> `./gen_sbox_testrun`
 
 - ARIA8 (Python)
 - - 경로 `ARIA/aria/ARIA-Py`
