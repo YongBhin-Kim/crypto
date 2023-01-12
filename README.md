@@ -30,7 +30,7 @@
 
 - AES BCM(Block Cipher Mode) (Providing ECB/CBC/(GCM))
 - - 경로 `AES/Mode/~`
-- - 명령어 `make` -> `./[exec file]`
+- - 명령어 `make` -> `./[exec file name]`
 
 
 **ARIA**
@@ -46,9 +46,9 @@
 - - 경로 `ARIA/aria/ARIA-Py`
 - - 명령어 `python3 aria.py`
 
-- ARIA BCM(Block Cipher Mode) (Providing CTR)
-- - 경로 `ARIA/aria/ARIA-Mode`
-- - 명령어 `make` -> `./[exec file]`
+- ARIA BCM(Block Cipher Mode) (Providing CTR/GCM)
+- - 경로 `ARIA/aria/ARIA-Mode/ARIA-[MODE]`
+- - 명령어 `make` -> `./aria_[mode]_testrun`
 
 
 
