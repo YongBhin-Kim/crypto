@@ -227,5 +227,16 @@ AES는 현재까지 존재하는 다양한 대칭키 암호 공격에 안전하�
 
 # 대칭키 암호 ARIA
 
+**ARIA 8비트** <br>
+
+**ARIA 암호화** <br>
+
+**ARIA 복호화** <br>
+
+**ARIA 32비트** <br>
+
+**Mode Of Operation, BCM(Block Cipher Mode)** <br>
+
 - **(ARIA-CTR)**
 - CAVP
+- **(ARIA-GCM)**
