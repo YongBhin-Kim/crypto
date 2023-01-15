@@ -1,13 +1,13 @@
 # Makefile for
-# 1. gen_sbox
+# 1. gen_sbox testrun
 # 2. aria enc/dec testrun
 
 # CC
 CC		= gcc
 
 # Generate ARIA sbox
-GENSBOX			= gen_sbox
-GENSBOX_SRCS	= gen_sbox.c
+GENSBOX			= gen_sbox_testrun
+GENSBOX_SRCS	= gen_sbox_testrun.c
 
 # ARIA encryption/decryption
 ARIA_SRCS		= aria.c
