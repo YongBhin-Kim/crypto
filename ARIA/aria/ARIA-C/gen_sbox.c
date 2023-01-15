@@ -208,29 +208,4 @@ void gen_aria_isbox(byte isbox[2][256]) {
     }
 }
 
-
-// main function
-int main() {
-
-    byte sbox[2][256], isbox[2][256];
-
-    gen_aria_sbox(sbox);   
-    gen_aria_isbox(isbox); 
-
-
-    printf("\n  ===============================================\n");
-    printf("  * Genereate ARIA sbox1, sbox2, isbox1, isbox2 \n");
-    printf("  -----------------------------------------------\n");
-    printf("  * [ sbox1 ] \n");  print_matrix(sbox[0]);
-    printf("  * [ isbox1 ] \n"); print_matrix(isbox[0]);
-
-    printf("  -----------------------------------------------\n");
-
-    printf("  * [ sbox2 ] \n");  print_matrix(sbox[1]);
-    printf("  * [ isbox2 ] \n"); print_matrix(isbox[1]);
-    printf("  ===============================================\n");
-
-    return 0;
-}
-
 // EOF
