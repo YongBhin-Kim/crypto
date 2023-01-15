@@ -1,5 +1,7 @@
-# Symmetric cryptography - Providing AES, ARIA with used mathmatics
+# Symmetric cryptography - AES, ARIA
+<h3/> ( For AES, ARIA algorithm this repository provides algorithms, implementations, and mathematical techniques used ) </h3>
 현대 암호와 사용되는 수학
+
 
 **[Environment]**
 - MacOS
@@ -11,8 +13,8 @@
 - Python3
 
 **[Implementation]**
-- C style implementation
-- C++ implemtation using Class
+- C implementation
+- C++ implemtation 
 - Python implementation
 
 **[Compile & Run]**
@@ -28,7 +30,7 @@
 
 - AES BCM(Block Cipher Mode) (Providing ECB/CBC/(GCM))
 - - 경로 `AES/Mode/~`
-- - 명령어 `make` -> `./~`
+- - 명령어 `make` -> `./[exec file name]`
 
 
 **ARIA**
@@ -38,15 +40,15 @@
 
 - ARIA Sbox (C)
 - - 경로 `ARIA/aria/ARIA-C`
-- - 명령어 `make` -> `./gen_sbox`
+- - 명령어 `make` -> `./gen_sbox_testrun`
 
 - ARIA8 (Python)
 - - 경로 `ARIA/aria/ARIA-Py`
 - - 명령어 `python3 aria.py`
 
-- ARIA BCM(Block Cipher Mode) (Providing CTR)
-- - 경로 `ARIA/aria/ARIA-Mode`
-- - 명령어 `gcc -o [exec file name] aria_ctr_testrun.c`
+- ARIA BCM(Block Cipher Mode) (Providing CTR/GCM)
+- - 경로 `ARIA/aria/ARIA-Mode/ARIA-[MODE]`
+- - 명령어 `make` -> `./aria_[mode]_testrun`
 
 
 
