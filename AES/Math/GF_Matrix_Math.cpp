@@ -158,10 +158,11 @@ GF_Matrix GF_Mat_inverse(GF_Matrix M) {
 
 
 void Run_GF_matrix_test() {
-    byte MixCol[4][4] = { {0x02, 0x03, 0x01, 0x01}, {0x01, 0x02, 0x03, 0x01},
-                          {0x01, 0x01, 0x02, 0x03} , {0x03, 0x01, 0x01, 0x02} };
-    //byte MixCol[4][4] = { {0x01, 0x00, 0x00, 0x00}, {0x00, 0x01, 0x00, 0x00},
-    //                      {0x00, 0x00, 0x01, 0x00} , {0x00, 0x00, 0x00, 0x01} };
+    byte MixCol[4][4]    = { {0x02, 0x03, 0x01, 0x01}, {0x01, 0x02, 0x03, 0x01},
+                            {0x01, 0x01, 0x02, 0x03} , {0x03, 0x01, 0x01, 0x02} };
+    byte InvMixCol[4][4] = { {0x0e, 0x0b, 0x0d, 0x09}, {0x09, 0x0e, 0x0b, 0x0d},
+                            {0x0d, 0x09, 0x0e, 0x0b} , {0x0b, 0x0d, 0x09, 0x0e} };
+
     GF_Matrix MC, MC2, MC4, InvMC;
     MC.row = 4;
     MC.col = 4;
@@ -177,11 +178,27 @@ void Run_GF_matrix_test() {
     MC4 = GF_Mat_Mul(MC2, MC2);
     cout << "MC^4 = " << endl;
     GF_Mat_print(MC4);
-/*
+
     InvMC = GF_Mat_inverse(MC);
     cout << "Inv MC" << endl;
     GF_Mat_print(InvMC);
-*/
+
+
+    // InvMC_mat = MC_mat * primivice_mat
+    byte primitive_poly[4][4] = { {0x05, 0x00, 0x04, 0x00}, {0x00, 0x05, 0x00, 0x04},
+                            {0x04, 0x00, 0x05, 0x00} , {0x00, 0x04, 0x00, 0x05} };
+    GF_Matrix tmp; // MC * primitive_mat
+    GF_Matrix primitive_mat; // 4x^2 + 5 over GF(2^8)^4
+    primitive_mat.row = 4;
+    primitive_mat.col = 4;
+    for (int i = 0; i < 4; i++)
+        for (int j = 0; j < 4; j++)
+            primitive_mat.M[i][j] = primitive_poly[i][j];
+    tmp = GF_Mat_Mul(MC, primitive_mat);
+    cout << "MC * (4x^2 + 5)" << endl;
+    GF_Mat_print(tmp);
+
+
 }
 
 /*
@@ -190,4 +207,3 @@ int main()
     Run_GF_matrix_test();
 }
 */
-
