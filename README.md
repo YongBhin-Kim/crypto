@@ -14,7 +14,7 @@
 
 **[Implementation]**
 - C implementation
-- C++ implemtation 
+- C++ implementation
 - Python implementation
 
 **[Compile & Run]**
