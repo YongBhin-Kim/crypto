@@ -2,6 +2,8 @@
 <h3/> ( For AES, ARIA algorithm this repository provides algorithms, implementations, and mathematical techniques used ) </h3>
 현대 암호와 사용되는 수학
 
+**[Update]**
+- CPU parallel implementation of block cipher ARIA (23.2.7)
 
 **[Environment]**
 - MacOS
@@ -16,6 +18,7 @@
 - C implementation
 - C++ implementation
 - Python implementation
+- C parallel implementation
 
 **[Compile & Run]**
 
@@ -33,7 +36,7 @@
 - - 명령어 `make` -> `./[exec file name]`
 
 
-**ARIA**
+**ARIA-128/192/256**
 - ARIA8 (C)
 - - 경로 `ARIA/aria/ARIA-C`
 - - 명령어 `make` -> `./aria_testrun`
@@ -49,6 +52,10 @@
 - ARIA BCM(Block Cipher Mode) (Providing CTR/GCM)
 - - 경로 `ARIA/aria/ARIA-Mode/ARIA-[MODE]`
 - - 명령어 `make` -> `./aria_[mode]_testrun`
+
+- ARIA Parallel implementation (C)
+- - 경로 `ARIA/aria/ARIA-C`
+- - 명령어 `make` -> `./aria_parallel_testrun`
 
 
 
@@ -240,3 +247,6 @@ AES는 현재까지 존재하는 다양한 대칭키 암호 공격에 안전하�
 - **(ARIA-CTR)**
 - CAVP
 - **(ARIA-GCM)**
+
+**Parallel implementation** <br>
+- **Key expansion part (Using thread)**
