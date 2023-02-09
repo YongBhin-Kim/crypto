@@ -251,4 +251,5 @@ AES는 현재까지 존재하는 다양한 대칭키 암호 공격에 안전하�
 
 **Parallel implementation** <br>
 - **Key expansion part (Using thread)**
+- - Parallel key expansion versus normal key expansion
 - **CTR mode** 
