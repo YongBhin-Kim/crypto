@@ -4,6 +4,7 @@
 
 **[Update]**
 - CPU parallel implementation of block cipher ARIA (23.2.7)
+- Implementation : normal versus parallel in ARIA key expansion (23.2.9)
 
 **[Environment]**
 - MacOS
@@ -53,7 +54,7 @@
 - - 경로 `ARIA/aria/ARIA-Mode/ARIA-[MODE]`
 - - 명령어 `make` -> `./aria_[mode]_testrun`
 
-- ARIA Parallel implementation (C)
+- ARIA Parallel implementation (Compare with normal implementation)
 - - 경로 `ARIA/aria/ARIA-C`
 - - 명령어 `make` -> `./aria_parallel_testrun`
 
