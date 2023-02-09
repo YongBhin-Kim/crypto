@@ -5,7 +5,7 @@
 **[Update]**
 - CPU parallel implementation of block cipher ARIA (23.2.7)
 - Implementation : normal versus parallel in ARIA key expansion (23.2.9)
-
+- Implementation : CTR mode parallel implementation
 **[Environment]**
 - MacOS
 - Visual Studio Code 2
@@ -252,4 +252,5 @@ AES는 현재까지 존재하는 다양한 대칭키 암호 공격에 안전하�
 **Parallel implementation** <br>
 - **Key expansion part (Using thread)**
 - - Parallel key expansion versus normal key expansion : Compare who is faster after several iterations
+- - Parallel CTR mode
 - **CTR mode** 
