@@ -58,6 +58,10 @@
 - - 경로 `ARIA/aria/ARIA-C`
 - - 명령어 `make` -> `./aria_parallel_testrun`
 
+- CTR Mode Parallel implementation
+- - 경로 `ARIA/aria/ARIA-Mode/CTR/`
+- - 명령어 `make` -> `./aria_ctr_parallel_testrun`
+
 
 
 **[Coming soon]**
