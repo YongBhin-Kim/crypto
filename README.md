@@ -62,6 +62,10 @@
 - - 경로 `ARIA/aria/ARIA-Mode/CTR/`
 - - 명령어 `make` -> `./aria_ctr_parallel_testrun`
 
+- GCM Mode Parallel implementation
+- - 경로 `ARIA/aria/ARIA-Mode/GCM`
+- - 명령어 `make` -> `./aria_gcm_parallel_testrun`
+
 
 
 **[Coming soon]**
