@@ -42,6 +42,10 @@
 - - 경로 `ARIA/aria/ARIA-C`
 - - 명령어 `make` -> `./aria_testrun`
 
+- ARIA Parallel implementation (Compare with normal implementation)
+- - 경로 `ARIA/aria/ARIA-C`
+- - 명령어 `make` -> `./aria_parallel_testrun`
+
 - ARIA Sbox (C)
 - - 경로 `ARIA/aria/ARIA-C`
 - - 명령어 `make` -> `./gen_sbox_testrun`
@@ -54,15 +58,9 @@
 - - 경로 `ARIA/aria/ARIA-Mode/ARIA-[MODE]`
 - - 명령어 `make` -> `./aria_[mode]_testrun`
 
-- ARIA Parallel implementation (Compare with normal implementation)
-- - 경로 `ARIA/aria/ARIA-C`
-- - 명령어 `make` -> `./aria_parallel_testrun`
-
-- CTR Mode Parallel implementation
-- - 경로 `ARIA/aria/ARIA-Mode/CTR/`
+- ARIA BCM Parallel implementation (Providing CTR/GCM)
+- - 경로 `ARIA/aria/ARIA-Mode/CTR`
 - - 명령어 `make` -> `./aria_ctr_parallel_testrun`
-
-- GCM Mode Parallel implementation
 - - 경로 `ARIA/aria/ARIA-Mode/GCM`
 - - 명령어 `make` -> `./aria_gcm_parallel_testrun`
 
