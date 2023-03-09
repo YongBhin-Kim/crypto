@@ -5,7 +5,9 @@
 **[Update]**
 - CPU parallel implementation of block cipher ARIA (23.2.7)
 - Implementation : normal versus parallel in ARIA key expansion (23.2.9)
-- Implementation : CTR mode parallel implementation
+- Implementation : CTR mode parallel implementation using CPU
+- Implementation : CTR mode parallel implementation using GPU
+
 **[Environment]**
 - MacOS
 - Visual Studio Code 2
