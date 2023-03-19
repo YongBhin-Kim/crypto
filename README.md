@@ -15,7 +15,7 @@
 **[Language]**
 - C
 - C++
-- Python3
+- Python
 
 **[Implementation]**
 - C implementation
