@@ -70,6 +70,7 @@
 
 **[Coming soon]**
 
+- CUDA GPU parallel program
 - Gray box 
 - - FOCPA(First Order Correlation Power Attack) <br>
 - - Implementation of masked AES resistant to FOCPA
