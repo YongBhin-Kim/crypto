@@ -25,6 +25,7 @@
 - C++ implementation
 - Python implementation
 - C parallel implementation
+- CUDA parallel implementation
 
 **[Compile & Run]**
 
@@ -63,7 +64,7 @@
 - - 경로 `ARIA/aria/ARIA-Mode/ARIA-[MODE]`
 - - 명령어 `make` -> `./aria_[mode]_testrun`
 
-- ARIA BCM Parallel implementation (Providing CTR/GCM)
+- ARIA BCM Parallel implementation using CPU (Providing CTR/GCM)
 - - 경로 `ARIA/aria/ARIA-Mode/CTR`
 - - 명령어 `make` -> `./aria_ctr_parallel_testrun`
 - - 경로 `ARIA/aria/ARIA-Mode/GCM`
@@ -77,7 +78,8 @@
 
 
 **[Coming soon]**
-
+- SIMD instruction sets
+- - AVX2 instruction set
 - Gray box 
 - - FOCPA(First Order Correlation Power Attack) <br>
 - - Implementation of masked AES resistant to FOCPA
@@ -265,8 +267,9 @@ AES는 현재까지 존재하는 다양한 대칭키 암호 공격에 안전하�
 - CAVP
 - **(ARIA-GCM)**
 
-**Parallel implementation** <br>
+**Parallel implementation - CPU, GPU** <br>
 - **Key expansion part (Using thread)**
 - - Parallel key expansion versus normal key expansion : Compare who is faster after several iterations
 - - Parallel CTR mode
 - **CTR mode** 
+- **GCM mode** 
