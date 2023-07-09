@@ -18,7 +18,7 @@
 #define TIMECHECK   1 // If you want to check time, then apply this value 1, else then 0
 #define _DEBUG      0 
 
-#include <time.h>
+// #include <time.h>
 #include <sys/time.h>
 #define KEYEXPANSION_PARALLEL 1 // 1(yes) or 0(no)
 
