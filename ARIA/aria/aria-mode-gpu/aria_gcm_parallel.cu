@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h> 
-// #include "../ARIA/aria.cuh"
+
 
 #define MAX_PT_BYTES 256
 #define MAX_BLOCKS (MAX_PT_BYTES/16 + 1)
