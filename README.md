@@ -1,11 +1,14 @@
 # Symmetric cryptography - AES, ARIA
-<h3/> ( For AES, ARIA algorithm this repository provides algorithms, implementations, and mathematical techniques used ) </h3>
+<h3/> ( For Symmetric key cryptography, this repository provides algorithms, implementations, and mathematical techniques used ) </h3>
 현대 암호와 사용되는 수학
+
 
 **[Update]**
 - CPU parallel implementation of block cipher ARIA (23.2.7)
 - Implementation : normal versus parallel in ARIA key expansion (23.2.9)
-- Implementation : CTR mode parallel implementation
+- Implementation : CTR mode parallel implementation using CPU
+- Implementation : CTR mode parallel implementation using GPU
+
 **[Environment]**
 - MacOS
 - Visual Studio Code 2
@@ -13,7 +16,7 @@
 **[Language]**
 - C
 - C++
-- Python3
+- Python
 
 **[Implementation]**
 - C implementation
@@ -42,6 +45,10 @@
 - - 경로 `ARIA/aria/ARIA-C`
 - - 명령어 `make` -> `./aria_testrun`
 
+- ARIA Parallel implementation (Compare with normal implementation)
+- - 경로 `ARIA/aria/ARIA-C`
+- - 명령어 `make` -> `./aria_parallel_testrun`
+
 - ARIA Sbox (C)
 - - 경로 `ARIA/aria/ARIA-C`
 - - 명령어 `make` -> `./gen_sbox_testrun`
@@ -54,18 +61,17 @@
 - - 경로 `ARIA/aria/ARIA-Mode/ARIA-[MODE]`
 - - 명령어 `make` -> `./aria_[mode]_testrun`
 
-- ARIA Parallel implementation (Compare with normal implementation)
-- - 경로 `ARIA/aria/ARIA-C`
-- - 명령어 `make` -> `./aria_parallel_testrun`
-
-- CTR Mode Parallel implementation
-- - 경로 `ARIA/aria/ARIA-Mode/CTR/`
+- ARIA BCM Parallel implementation (Providing CTR/GCM)
+- - 경로 `ARIA/aria/ARIA-Mode/CTR`
 - - 명령어 `make` -> `./aria_ctr_parallel_testrun`
+- - 경로 `ARIA/aria/ARIA-Mode/GCM`
+- - 명령어 `make` -> `./aria_gcm_parallel_testrun`
 
 
 
 **[Coming soon]**
 
+- CUDA GPU parallel program
 - Gray box 
 - - FOCPA(First Order Correlation Power Attack) <br>
 - - Implementation of masked AES resistant to FOCPA
