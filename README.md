@@ -3,7 +3,7 @@
 현대 암호와 사용되는 수학
 
 
-**[Update]**
+**[Updated]**
 - CPU parallel implementation of block cipher ARIA (23.2.7)
 - Implementation : normal versus parallel in ARIA key expansion (23.2.9)
 - Implementation : CTR mode parallel implementation using CPU (23.7.9)
@@ -18,6 +18,7 @@
 - C
 - C++
 - Python
+- CUDA
 
 **[Implementation]**
 - C implementation
@@ -67,12 +68,16 @@
 - - 명령어 `make` -> `./aria_ctr_parallel_testrun`
 - - 경로 `ARIA/aria/ARIA-Mode/GCM`
 - - 명령어 `make` -> `./aria_gcm_parallel_testrun`
+ 
+- ARIA BCM Parallel implementation using GPU (Providing CTR/GCM)
+- 경로 `ARIA/aria/aria-mode-gpu/`
+- 명령어 `make` -> `./aria_ctr_parallel`
+- 명령어 `make` -> `./aria_gcm_parallel`
 
 
 
 **[Coming soon]**
 
-- CUDA GPU parallel program
 - Gray box 
 - - FOCPA(First Order Correlation Power Attack) <br>
 - - Implementation of masked AES resistant to FOCPA
