@@ -80,6 +80,7 @@
 **[Coming soon]**
 - SIMD instruction sets
 - - AVX2 instruction set
+- Symmetric crypto LEA
 - Gray box 
 - - FOCPA(First Order Correlation Power Attack) <br>
 - - Implementation of masked AES resistant to FOCPA
