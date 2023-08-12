@@ -9,7 +9,6 @@
 - Implementation : CTR mode parallel implementation using GPU (23.7.9)
 - Implementation : GCM mode parallel implementation using GPU (23.7.9)
 
-
 **[Environment]**
 - MacOS
 - Visual Studio Code 2
