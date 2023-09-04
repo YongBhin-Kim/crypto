@@ -1,4 +1,4 @@
-# Symmetric cryptography - AES, ARIA
+# Symmetric cryptography
 <h3/> ( For Symmetric key cryptography, this repository provides algorithms, implementations, and mathematical techniques used ) </h3>
 현대 암호와 사용되는 수학
 
