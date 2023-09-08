@@ -75,7 +75,10 @@
 - 명령어 `make` -> `./aria_ctr_parallel`
 - 명령어 `make` -> `./aria_gcm_parallel`
 
-
+**GIFT**
+- GIFT64 
+- - 경로  `gift`
+- - 명령어 `gcc -o gift64 gift64.c` -> `./gift64`
 
 **[Coming soon]**
 - SIMD instruction sets
