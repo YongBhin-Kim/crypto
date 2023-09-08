@@ -2,12 +2,13 @@
 <h3/> ( For Symmetric key cryptography, this repository provides algorithms, implementations, and mathematical techniques used ) </h3>
 현대 암호와 사용되는 수학
 
-**[Updated]**
+**[2023 Updated]**
 - CPU parallel implementation of block cipher ARIA (23.2.7)
 - Implementation : normal versus parallel in ARIA key expansion (23.2.9)
 - Implementation : CTR mode parallel implementation using CPU (23.7.9)
 - Implementation : CTR mode parallel implementation using GPU (23.7.9)
 - Implementation : GCM mode parallel implementation using GPU (23.7.9)
+- Implementation : Lightweight Cryptography GIFT (23.9.8)
 
 **[Environment]**
 - MacOS
