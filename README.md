@@ -8,7 +8,8 @@
 - Implementation : CTR mode parallel implementation using CPU (23.7.9)
 - Implementation : CTR mode parallel implementation using GPU (23.7.9)
 - Implementation : GCM mode parallel implementation using GPU (23.7.9)
-- Implementation : Lightweight Cryptography GIFT (23.9.8)
+- Implementation : Lightweight Block Cipher GIFT (23.9.8)
+- Implementation : Lightweight Block Cipher CHAM (23.9.11)
 
 **[Environment]**
 - MacOS
@@ -79,6 +80,13 @@
 - GIFT64 
 - - 경로  `gift`
 - - 명령어 `gcc -o gift64 gift64.c` -> `./gift64`
+ 
+**CHAM**
+- CHAM64/128, CHAM128/128, CHAM128/256
+- - 경로  `cham`
+- - 명령어 `gcc -o cham64_128 cham64_128.c` -> `./cham64_128`
+- - 명령어 `gcc -o cham128_128 cham128_128.c` -> `./cham128_128`
+- - 명령어 `gcc -o cham128_256 cham128_256.c` -> `./cham128_256`
 
 **[Coming soon]**
 - SIMD instruction sets
