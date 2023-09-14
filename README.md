@@ -76,17 +76,17 @@
 - 명령어 `nvcc -o aria_ctr_parallel aria_ctr_parallel.cu -rdc=true` -> `./aria_ctr_parallel`
 - 명령어 `nvcc -o aria_gcm_parallel aria_gcm_parallel.cu -rdc=true` -> `./aria_gcm_parallel`
 
-**GIFT**
-- GIFT64 
-- - 경로  `gift`
-- - 명령어 `gcc -o gift64 gift64.c` -> `./gift64`
- 
 **CHAM**
 - CHAM64/128, CHAM128/128, CHAM128/256
-- - 경로  `cham`
+- - 경로  `cham/`
 - - 명령어 `gcc -o cham64_128 cham64_128.c` -> `./cham64_128`
 - - 명령어 `gcc -o cham128_128 cham128_128.c` -> `./cham128_128`
 - - 명령어 `gcc -o cham128_256 cham128_256.c` -> `./cham128_256`
+
+**GIFT**
+- GIFT64 
+- - 경로  `gift/`
+- - 명령어 `gcc -o gift64 gift64.c` -> `./gift64`
 
 **[Coming soon]**
 - SIMD instruction sets
