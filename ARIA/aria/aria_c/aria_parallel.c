@@ -12,6 +12,7 @@
 #define FAIL   -1
 #define SUCCESS 0
 
+
 /* Parallel */
 pthread_mutex_t mutx;
 
