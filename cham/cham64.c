@@ -53,6 +53,7 @@ CHAM-128/256  128  256  96  32  8
 #define u32 unsigned int
 
 
+
 void cham_keyschedule_64_128(u16 *rk, u16 *k)
 {
 	u16 rol1, rol8, rol11;	 // Rotation to Left ?-bits
