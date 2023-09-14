@@ -8,7 +8,8 @@
 - Implementation : CTR mode parallel implementation using CPU (23.7.9)
 - Implementation : CTR mode parallel implementation using GPU (23.7.9)
 - Implementation : GCM mode parallel implementation using GPU (23.7.9)
-- Implementation : Lightweight Cryptography GIFT (23.9.8)
+- Implementation : Lightweight Block Cipher GIFT (23.9.8)
+- Implementation : Lightweight Block Cipher CHAM (23.9.11)
 
 **[Environment]**
 - MacOS
@@ -45,40 +46,47 @@
 
 **ARIA-128/192/256**
 - ARIA8 (C)
-- - 경로 `ARIA/aria/ARIA-C`
+- - 경로 `ARIA/aria/aria_c`
 - - 명령어 `make` -> `./aria_testrun`
 
 - ARIA Parallel implementation (Compare with normal implementation)
-- - 경로 `ARIA/aria/ARIA-C`
+- - 경로 `ARIA/aria/aria_c`
 - - 명령어 `make` -> `./aria_parallel_testrun`
 
 - ARIA Sbox (C)
-- - 경로 `ARIA/aria/ARIA-C`
+- - 경로 `ARIA/aria/aria_c`
 - - 명령어 `make` -> `./gen_sbox_testrun`
 
 - ARIA8 (Python)
-- - 경로 `ARIA/aria/ARIA-Py`
+- - 경로 `ARIA/aria/aria_py`
 - - 명령어 `python3 aria.py`
 
 - ARIA BCM(Block Cipher Mode) (Providing CTR/GCM)
-- - 경로 `ARIA/aria/ARIA-Mode/ARIA-[MODE]`
+- - 경로 `ARIA/aria/aria_mode_cpu/ARIA-[MODE]`
 - - 명령어 `make` -> `./aria_[mode]_testrun`
 
 - ARIA BCM Parallel implementation using CPU (Providing CTR/GCM)
-- - 경로 `ARIA/aria/ARIA-Mode/CTR`
+- - 경로 `ARIA/aria/aria_mode_cpu/CTR`
 - - 명령어 `make` -> `./aria_ctr_parallel_testrun`
-- - 경로 `ARIA/aria/ARIA-Mode/GCM`
+- - 경로 `ARIA/aria/aria_mode_cpu/GCM`
 - - 명령어 `make` -> `./aria_gcm_parallel_testrun`
  
 - ARIA BCM Parallel implementation using GPU (Providing CTR/GCM)
 - 경로 `ARIA/aria/aria-mode-gpu/`
-- 명령어 `make` -> `./aria_ctr_parallel`
-- 명령어 `make` -> `./aria_gcm_parallel`
+- 명령어 `nvcc -o aria_ctr_parallel aria_ctr_parallel.cu -rdc=true` -> `./aria_ctr_parallel`
+- 명령어 `nvcc -o aria_gcm_parallel aria_gcm_parallel.cu -rdc=true` -> `./aria_gcm_parallel`
 
 **GIFT**
 - GIFT64 
 - - 경로  `gift`
 - - 명령어 `gcc -o gift64 gift64.c` -> `./gift64`
+ 
+**CHAM**
+- CHAM64/128, CHAM128/128, CHAM128/256
+- - 경로  `cham`
+- - 명령어 `gcc -o cham64_128 cham64_128.c` -> `./cham64_128`
+- - 명령어 `gcc -o cham128_128 cham128_128.c` -> `./cham128_128`
+- - 명령어 `gcc -o cham128_256 cham128_256.c` -> `./cham128_256`
 
 **[Coming soon]**
 - SIMD instruction sets
