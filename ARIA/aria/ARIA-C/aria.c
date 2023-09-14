@@ -258,7 +258,6 @@ void keyexpansion(unsigned char *mk, unsigned char (*enc_w)[16], unsigned char (
     fo(temp0, CK1);
     for (int i=0; i<16; i++)
         W1[i] = temp0[i] ^ KR[i];
-
     // W2 <- fe(W1, CK2) ^ W0
     memset(&temp0, 0, sizeof(temp0));
     for (int i=0; i<16; i++)
@@ -266,7 +265,6 @@ void keyexpansion(unsigned char *mk, unsigned char (*enc_w)[16], unsigned char (
     fe(temp0, CK2);
     for (int i=0; i<16; i++)
         W2[i] = temp0[i] ^ W0[i];
-
     // W3 <- fo(W2, CK3) ^ W1
     memset(temp0, 0, sizeof(temp0));
     for (int i=0; i<16; i++)
@@ -353,7 +351,6 @@ void aria_enc(unsigned char plaintext[16], unsigned char ciphertext[16], unsigne
         else
             fe(state, w[r-1]);
     }
-
     // Final round : 12/14/16 (ARIA-128/192/256)
     ff(state, w[round-1], w[round]);
 
