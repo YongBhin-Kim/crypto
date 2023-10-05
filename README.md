@@ -286,4 +286,8 @@ AES는 현재까지 존재하는 다양한 대칭키 암호 공격에 안전하�
 - - Parallel key expansion versus normal key expansion : Compare who is faster after several iterations
 - - Parallel CTR mode
 - **CTR mode** 
-- **GCM mode** 
+- **GCM mode**
+
+
+
+# 차분 특성
