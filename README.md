@@ -12,9 +12,9 @@
 - Implementation : Lightweight Block Cipher CHAM (23.9.11)
 
 **[Environment]**
-- MacOS and Linux
-- Visual Studio Code 2
-- clang, gcc
+- MacOS and Linux visual studio code 2
+- Windows visual studio
+- clang, gcc, g++
 
 **[Language]**
 - C
