@@ -90,6 +90,7 @@
 - - 명령어 `gcc -o gift64 gift64.c` -> `./gift64`
 
 **[Coming soon]**
+- gpu implementations of cham ctr drbg
 - SIMD instruction sets
 - - AVX2 instruction set
 - Symmetric crypto LEA
