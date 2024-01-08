@@ -98,6 +98,7 @@
 - Gray box 
 - - FOCPA(First Order Correlation Power Attack) <br>
 - - Implementation of masked AES resistant to FOCPA
+- HASH: SHA224/256/384/512
 
 
 # 대칭키 암호 AES
