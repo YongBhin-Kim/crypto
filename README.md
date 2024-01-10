@@ -1,6 +1,12 @@
-# Symmetric cryptography
-<h3/> ( For Symmetric key cryptography, this repository provides algorithms, implementations, and mathematical techniques used ) </h3>
-현대 암호와 사용되는 수학
+# Cryptography
+<h3/> For a variety of ciphers(Classical, Modern, Post-Quantum Cryptography), this repository provides algorithms(reference, fast impl., attack, etc.), implementations, and mathematical techniques used. </h3>
+
+**[2024 Updated]**
+- HASH functions: SHA-2 (SHA-224/256/384/512)
+- MAC
+- DRBG
+- Public Key
+- Signature
 
 **[2023 Updated]**
 - CPU parallel implementation of block cipher ARIA (23.2.7)
