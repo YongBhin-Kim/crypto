@@ -1,6 +1,13 @@
-# Symmetric cryptography
-<h3/> ( For Symmetric key cryptography, this repository provides algorithms, implementations, and mathematical techniques used ) </h3>
-현대 암호와 사용되는 수학
+# Cryptography
+<h3/> For a variety of ciphers(Classical, Modern, Post-Quantum Cryptography), this repository provides algorithms(reference, fast impl., attack, etc.), implementations, and mathematical techniques used. </h3>
+
+
+**[2024 Updated]**
+- HASH functions: SHA-2 (SHA-224/256/384/512)
+- MAC
+- DRBG
+- Public Key
+- Signature
 
 **[2023 Updated]**
 - CPU parallel implementation of block cipher ARIA (23.2.7)
@@ -12,8 +19,9 @@
 - Implementation : Lightweight Block Cipher CHAM (23.9.11)
 
 **[Environment]**
-- MacOS
-- Visual Studio Code 2
+- MacOS and Linux visual studio code 2
+- Windows visual studio
+- clang, gcc, g++
 
 **[Language]**
 - C
@@ -76,25 +84,28 @@
 - 명령어 `nvcc -o aria_ctr_parallel aria_ctr_parallel.cu -rdc=true` -> `./aria_ctr_parallel`
 - 명령어 `nvcc -o aria_gcm_parallel aria_gcm_parallel.cu -rdc=true` -> `./aria_gcm_parallel`
 
-**GIFT**
-- GIFT64 
-- - 경로  `gift`
-- - 명령어 `gcc -o gift64 gift64.c` -> `./gift64`
- 
 **CHAM**
 - CHAM64/128, CHAM128/128, CHAM128/256
-- - 경로  `cham`
+- - 경로  `cham/`
 - - 명령어 `gcc -o cham64_128 cham64_128.c` -> `./cham64_128`
 - - 명령어 `gcc -o cham128_128 cham128_128.c` -> `./cham128_128`
 - - 명령어 `gcc -o cham128_256 cham128_256.c` -> `./cham128_256`
 
+**GIFT**
+- GIFT64 
+- - 경로  `gift/`
+- - 명령어 `gcc -o gift64 gift64.c` -> `./gift64`
+
 **[Coming soon]**
+- ARX Block Cipher LEA
+- gpu implementations of cham ctr drbg
 - SIMD instruction sets
 - - AVX2 instruction set
 - Symmetric crypto LEA
 - Gray box 
 - - FOCPA(First Order Correlation Power Attack) <br>
 - - Implementation of masked AES resistant to FOCPA
+- HASH: SHA224/256/384/512
 
 
 # 대칭키 암호 AES
@@ -284,4 +295,9 @@ AES는 현재까지 존재하는 다양한 대칭키 암호 공격에 안전하�
 - - Parallel key expansion versus normal key expansion : Compare who is faster after several iterations
 - - Parallel CTR mode
 - **CTR mode** 
-- **GCM mode** 
+- **GCM mode**
+
+
+
+# 차분 특성
+- 비선형 함수 $s(x)$의 최대 차분확률 $DP(s)$의 정의는 다음과 같다.
