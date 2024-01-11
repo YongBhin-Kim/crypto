@@ -21,7 +21,8 @@
 **[Environment]**
 - MacOS and Linux visual studio code 2
 - Windows visual studio
-- clang, gcc, g++
+- clang, gcc, g++, MSVC, nvcc
+- gdb, lldb
 
 **[Language]**
 - C
@@ -38,6 +39,11 @@
 
 **[Compile & Run]**
 
+
+**SHA-256**
+- - path `~HASH/SHA`
+  - command `make run`
+ 
 **AES**
 - AES8 
 - - 경로  `AES/AES8`
@@ -95,6 +101,7 @@
 - GIFT64 
 - - 경로  `gift/`
 - - 명령어 `gcc -o gift64 gift64.c` -> `./gift64`
+
 
 **[Coming soon]**
 - ARX Block Cipher LEA
