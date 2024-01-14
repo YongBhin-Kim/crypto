@@ -18,7 +18,6 @@
 
 #define e0(x,y,z) (((x) & (y)) ^ (~(x) & (z)))
 #define e1(x,y,z) (((x) & (y)) ^ ((x) & (z)) ^ ((y) & (z))) 
-
 #define e2(x)     (rotr(x,2)  ^ rotr(x,13) ^ rotr(x,22) ) 
 #define e3(x)     (rotr(x,6)  ^ rotr(x,11) ^ rotr(x,25) ) 
 #define e4(x)     (rotr(x,7)  ^ rotr(x,18) ^ ((x) >> 3) ) 
@@ -37,8 +36,7 @@ static const u32 C[64] = {
 };
 
 /*********************** SHA256 Function Definitions ***********************/
-void _sha256_transform( SHA256_CTX *ctx, const u8 data[] )
-{
+void _sha256_transform( SHA256_CTX *ctx, const u8 data[] ) {
 	u32 a, b, c, d, e, f, g, h, i, j, t1, t2, m[64];
 
 	for (i = 0, j = 0; i < 16; ++i, j += 4)
@@ -78,8 +76,7 @@ void _sha256_transform( SHA256_CTX *ctx, const u8 data[] )
 	ctx->state[7] += h;
 }
 
-void sha256_init( OUT SHA256_CTX *ctx )
-{
+void sha256_init( OUT SHA256_CTX *ctx ) {
     ctx->datalen = ctx->bitlen = 0;
 	ctx->state[0] = 0x6a09e667;
 	ctx->state[1] = 0xbb67ae85;
@@ -91,11 +88,9 @@ void sha256_init( OUT SHA256_CTX *ctx )
 	ctx->state[7] = 0x5be0cd19;
 }
 
-void sha256_update( OUT SHA256_CTX *ctx, IN const u8 data[], IN size_t len )
-{
+void sha256_update( OUT SHA256_CTX *ctx, IN const u8 data[], IN size_t len ) {
 	u32 i;
 
-    // ctx->data = bc
 	for (i = 0; i < len; ++i) {
 		ctx->data[ctx->datalen] = data[i];
 		ctx->datalen++;
@@ -107,8 +102,7 @@ void sha256_update( OUT SHA256_CTX *ctx, IN const u8 data[], IN size_t len )
 	}
 }
 
-void sha256_final( OUT SHA256_CTX *ctx, OUT u8 digest[] )
-{
+void sha256_final( OUT SHA256_CTX *ctx, OUT u8 digest[] ) {
 	u32 i;
 
 	i = ctx->datalen;
@@ -155,14 +149,17 @@ void sha256_final( OUT SHA256_CTX *ctx, OUT u8 digest[] )
 
 void sha256_encrypt( IN const u8 *data, IN size_t len, OUT u8 digest[] ) {
     
+    // SHA-256 encrypt
     SHA256_CTX ctx;
-    
+
     sha256_init(&ctx);
     sha256_update(&ctx, data, len);
     sha256_final(&ctx, digest);
 
+    // Zeroisation
+    u8 i;
     volatile u8 *p  = (u8 *)ctx.data;
     volatile u32 *q = (u32 *)ctx.state;
-    for (int i=0; i<64; ++i) ctx.data[i] = 0x00;
-    for (int i=0; i<8;  ++i) ctx.state[i] = 0x00000000;
+    for (i=0; i<64; ++i) ctx.data[i] = 0x00;
+    for (i=0; i<8;  ++i) ctx.state[i] = 0x00000000;
 }
