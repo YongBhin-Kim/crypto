@@ -3,7 +3,7 @@
 
 
 **[2024 Updated]**
-- HASH functions: SHA-2 (SHA-224/256/384/512)
+- HASH functions: SHA-2 (SHA-224/256)
 - MAC
 - DRBG
 - Public Key
@@ -40,22 +40,22 @@
 **[Compile & Run]**
 
 
-**SHA-256**
-- - path `~HASH/SHA`
+**SHA-224/256**
+- - path `~HASH/SHA/SHA*`
   - command `make run`
  
 **AES**
-- AES8 
-- - 경로  `AES/AES8`
-- - 명령어 `make` -> `./AES8`
+- AES 8-bit implementations 
+- - path  `AES/AES8`
+- - command `make` -> `./AES8`
 
-- AES32
-- - 경로  `AES/AES32`
-- - 명령어 `make` -> `./AES32`
+- AES 32-bit implementations
+- - path  `AES/AES32`
+- - command `make` -> `./AES32`
 
 - AES BCM(Block Cipher Mode) (Providing ECB/CBC/(GCM))
-- - 경로 `AES/Mode/~`
-- - 명령어 `make` -> `./[exec file name]`
+- - path `AES/Mode/~`
+- - command `make` -> `./[exec file name]`
 
 
 **ARIA-128/192/256**
