@@ -6,10 +6,11 @@
 - HASH functions: SHA-2 (SHA-224/256)
 - MAC
 - DRBG
-- Public Key Cipher
+- Public Key Cryptography
 - Signature
 - KDF
 - OQS
+- CCM, GCM
 
 **[2023 Updated]**
 - CPU parallel implementation of block cipher ARIA (23.2.7)
