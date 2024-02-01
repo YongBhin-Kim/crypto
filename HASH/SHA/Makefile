@@ -1,0 +1,26 @@
+# Makefile for
+# 1. SHA-2
+
+CC							= gcc
+LDFLAGS						= -g -O2
+
+SHA2_TEST = sha2_test
+SHA2_HEADERS = SHA256/sha256.h # SHA512/sha512.h
+SHA2_SOURCES = SHA256/sha256.c # SHA512/sha512.c
+# SHA2_TEST_HEADERS = sha2_test.h
+SHA2_TEST_SOURCES = sha2_test.c
+HASH_API_SOURCES = HASH_API.c
+HASH_API_HEADERS = HASH_API.h
+
+all : clean $(SHA2_TEST)
+
+$(SHA2_TEST):	$(SHA2_TEST_SOURCES) $(SHA2_SOURCES) $(HASH_API_SOURCES) $(SHA2_HEADERS) $(HASH_API_HEADERS)
+	$(CC) -o $@ $(SHA2_TEST_SOURCES) $(SHA2_SOURCES) $(HASH_API_SOURCES) $(LDFLAGS)
+
+run: clean sha2_test
+	./sha2_test
+
+clean:
+	rm -rf $(SHA2_TEST)
+
+# EOF
