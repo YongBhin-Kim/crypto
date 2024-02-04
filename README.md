@@ -1,5 +1,5 @@
 # Cryptography
-<h3/> For a variety of ciphers(Classical, Modern, Post-Quantum Cryptography), this repository provides algorithms(reference, fast impl., attack, etc.), implementations, and mathematical techniques used. </h3>
+<h3/> For a variety of ciphers(Classical, Modern, Post-Quantum Cryptography), this repository provides algorithms, implementations(reference, fast impl., attack, etc.), and mathematical techniques used(field, differential, etc.). </h3>
 
 
 **[2024 Updated]**
