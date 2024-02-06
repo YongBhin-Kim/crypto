@@ -46,7 +46,9 @@
 **SHA-224/256**
 - - path `~HASH/SHA/SHA*`
   - command `make run`
- 
+- - path `~HASH/SHA` (polymorphism)
+  - command `make run`
+
 **AES**
 - AES 8-bit implementations 
 - - path  `AES/AES8`
