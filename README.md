@@ -3,7 +3,7 @@
 
 **[2024 Updated]**
 - HASH functions: SHA-2 (SHA-224/256)
-- MAC
+- MAC (HMAC)
 - DRBG
 - Public Key Cryptography
 - Signature
