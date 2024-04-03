@@ -12,6 +12,7 @@
 - CCM, GCM
 - KCDSA
 - Cryptographic Module
+- Seed
 
 **[2023 Updated]**
 - CPU parallel implementation of block cipher ARIA (23.2.7)
