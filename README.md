@@ -1,16 +1,18 @@
 # Cryptography
-<h3/> For a variety of ciphers(Classical, Modern, Post-Quantum Cryptography), this repository provides algorithms(reference, fast impl., attack, etc.), implementations, and mathematical techniques used. </h3>
-
+<h3/> For a variety of ciphers(Classical, Modern, Post-Quantum Cryptography), this repository provides algorithms(symmetric key, hash, etc.), implementations(reference, fast impl., attack, cpu, gpu, etc.), and mathematical techniques used(finite field, differential, etc.). </h3>
 
 **[2024 Updated]**
 - HASH functions: SHA-2 (SHA-224/256)
-- MAC
+- MAC (HMAC)
 - DRBG
 - Public Key Cryptography
 - Signature
 - KDF
 - OQS
 - CCM, GCM
+- KCDSA
+- Cryptographic Module
+- Seed
 
 **[2023 Updated]**
 - CPU parallel implementation of block cipher ARIA (23.2.7)
@@ -46,7 +48,9 @@
 **SHA-224/256**
 - - path `~HASH/SHA/SHA*`
   - command `make run`
- 
+- - path `~HASH/SHA` (polymorphism)
+  - command `make run`
+
 **AES**
 - AES 8-bit implementations 
 - - path  `AES/AES8`
