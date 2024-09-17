@@ -14,7 +14,7 @@ G = (0x79BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798,
 n = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141
 
 # Additive operation over secp256k1
-def add(a, b, p, q, m):
+def _add(a, b, p, q, m):
     if q == (math.inf, math.inf):
         return p
     
@@ -38,7 +38,7 @@ def add(a, b, p, q, m):
     return x3, y3
 
 # Generate private key for ECDSA signing
-def generate_sk():
+def _generate_sk():
     while(1):
         d = random.getrandbits(256)
         if d > 0 & d < n:
@@ -47,7 +47,7 @@ def generate_sk():
     return d
 
 # Compute public key for ECDSA verifing
-def generate_pk(d, g):
+def _generate_pk(d, g):
     bits = bin(d)
     bits = bits[2:len(bits)]
     
@@ -57,25 +57,25 @@ def generate_pk(d, g):
     # From the second bit, Double-and-Add
     bits = bits[1:len(bits)]
     for bit in bits:
-        K = add(a, b, K, K, m) # doubling
+        K = _add(a, b, K, K, m) # doubling
         if bit == '1': # multiply
-            K = add(a, b, K, g, m)
+            K = _add(a, b, K, g, m)
             
     return K
 
 # Multiplicative operation over secp256k1 (same to compute public key)
-def mul(d, g):
-    return generate_pk(d, g)
+def _mul(d, g):
+    return _generate_pk(d, g)
 
 # ECDSA Signature algorithm
 def ecdsa_sign(message: str):
 
     # Compute sign 'r'
-    d = generate_sk() # Generate private key of signer
-    Q = generate_pk(d, G) # Compute public key of signer
+    d = _generate_sk() # Generate private key of signer
+    Q = _generate_pk(d, G) # Compute public key of signer
     
-    k = generate_sk() # Genertae ephemeral(secret) key
-    x, y = mul(k, G)
+    k = _generate_sk() # Genertae ephemeral(secret) key
+    x, y = _mul(k, G)
     r = x % n 
 
     # Compute sign 's'
@@ -98,9 +98,9 @@ def ecdsa_verify(message: str, Q, r, s):
     w = pow(s, n-2, n)
     u1 = (w * e) % n
     u2 = (w * r) % n
-    v1 = mul(u1, G)
-    v2 = mul(u2, Q)
-    x, y = add(a, b, v1, v2, m)
+    v1 = _mul(u1, G)
+    v2 = _mul(u2, Q)
+    x, y = _add(a, b, v1, v2, m)
     
     if r == x % n:
         return True
@@ -115,10 +115,10 @@ if __name__ == "__main__":
     # ECDSA(SHA-256) Signing
     Q, r, s = ecdsa_sign(message)
     
-    
     # ECDSA(SHA-256) Verification
     ret = ecdsa_verify(message, Q, r, s)
     
+    # Debug
     print("\nMessage =", message)
     print("\nECDSA(SHA-256) Sign :")
     print("   r =", hex(r))
