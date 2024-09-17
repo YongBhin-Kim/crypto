@@ -7,7 +7,7 @@
 - MAC (HMAC)
 - DRBG
 - Public Key Cryptography
-- Signature
+- Signature: ECDSA(SHA-256) secp256k1(Koblitz curve) implementations.
 - KDF
 - OQS
 - CCM, GCM
