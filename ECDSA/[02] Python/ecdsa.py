@@ -1,5 +1,5 @@
 """This Python module is an implementation of the SHA-256 algorithm.
-From https://github.com/YongBhin-Kim/crypto/"""
+From https://github.com/YongBhin-Kim/crypto/tree/master/ECDSA"""
 
 import math
 import random
