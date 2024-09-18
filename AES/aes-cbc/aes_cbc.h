@@ -1,21 +1,23 @@
 /**
- * @file sha256.h
+ * @file aes_cbc.h
  * @author Yongbhin Kim (coji67@gmail.com)
- * @brief SHA256 implementations
+ * @brief api of aes cbc mode.
  * @version 0.1
- * @date 2024-01-09
+ * @date 2024-04-14
  * 
  * @copyright Copyright (c) Yongbhin Kim 2024
  */
 
-#ifndef SHA256_H
-#define SHA256_H
+
+#ifndef AES_CBC_H
+#define AES_CBC_H
 
 #ifdef  __cplusplus
 extern "C" {
 #endif
 
 #include <stdlib.h>
+#include "../AES32/AES32.h"
 
 #ifndef OUT                             // data output
 #define OUT 
@@ -29,28 +31,23 @@ extern "C" {
 #define INOUT
 #endif
 
-#define SHA256_DIGEST_SIZE 32  
-#define SHA512_DIGEST_SIZE 64
+#define BLOCK_SIZE 16                   // block size is 128-bit
 
 /**************************** DATA TYPES ****************************/
 typedef unsigned char  u8;             // 8-bit byte
 typedef unsigned int  u32;             // 32-bit word, change to "long" for 16-bit machines
 
-typedef struct {
-	u8  data[64];
-	u32 datalen;
-	unsigned long long bitlen;
-	u32 state[8];
-} SHA256_CTX;
 
 /*********************** FUNCTION DECLARATIONS **********************/
-void sha256_init( OUT SHA256_CTX *ctx );
-void sha256_update( OUT SHA256_CTX *ctx, IN const u8 data[], IN size_t len );
-void sha256_final( OUT SHA256_CTX *ctx, OUT u8 digest[] );
-void sha256_encrypt( IN const u8 *data, IN size_t len, OUT u8 digest[] );
+void aes_cbc_init( OUT AES_CTX *ctx );
+void aes_cbc_update( OUT SHA256_CTX *ctx, IN const u8 data[], IN size_t len );
+
+// typedef void* (*AESFunction)( IN const void *, IN size_t, OUT void * );
+// void* AESFunction( IN const void* data, IN size_t len, OUT void* ciphertext );
+// void* AES( IN const void* data, IN const size_t len, OUT void* ciphertext, IN AESMode AESMode );
 
 #ifdef  __cplusplus
 }
 #endif
 
-#endif   // SHA256_H
+#endif   // AES_CBC_H

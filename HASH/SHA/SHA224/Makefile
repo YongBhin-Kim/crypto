@@ -7,7 +7,7 @@ LDFLAGS						= -g -O2
 SHA224_TEST = sha224_test
 SHA224_HEADERS = sha224.h
 SHA224_SOURCES = sha224.c
-SHA224_TEST_SOURCES = main.c
+SHA224_TEST_SOURCES = sha224_test.c
 
 all : clean $(SHA224_TEST)
 

@@ -7,7 +7,7 @@ LDFLAGS						= -g -O2
 SHA256_TEST = sha256_test
 SHA256_HEADERS = sha256.h
 SHA256_SOURCES = sha256.c
-SHA256_TEST_SOURCES = main.c
+SHA256_TEST_SOURCES = sha256_test.c
 
 all : clean $(SHA256_TEST)
 
