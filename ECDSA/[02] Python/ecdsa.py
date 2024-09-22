@@ -1,4 +1,4 @@
-"""This Python module is an implementation of the SHA-256 algorithm.
+"""This Python module is an implementation of the ecdsa algorithm.
 From https://github.com/YongBhin-Kim/crypto/tree/master/ECDSA"""
 
 import math
