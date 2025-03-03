@@ -20,4 +20,4 @@ run: clean sha256_test
 clean:
 	rm -rf $(SHA256_TEST)
 
-# EOF
+# EOFc
