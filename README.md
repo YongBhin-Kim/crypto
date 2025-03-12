@@ -3,19 +3,17 @@
 
 **[2025 Updated]**
 - Block Cipher SEED(Feat. KISA)
+- DRBG
+- Public Key Cryptography
+- KDF
+- OQS
+- KCDSA
 
 **[2024 Updated]**
 - HASH functions: SHA-2 (SHA-224/256)
 - MAC (HMAC)
-- DRBG
-- Public Key Cryptography
 - Signature: ECDSA(SHA-256) secp256k1(Koblitz curve) implementations.
-- KDF
-- OQS
 - CCM, GCM
-- KCDSA
-- Cryptographic Module
-- Seed
 
 **[2023 Updated]**
 - CPU parallel implementation of block cipher ARIA (23.2.7)
